@@ -15,6 +15,7 @@
 		8E0643AD22013C4C00F977DF /* SkyScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0643AC22013C4C00F977DF /* SkyScannerTests.swift */; };
 		8E0643B822013C4C00F977DF /* SkyScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0643B722013C4C00F977DF /* SkyScannerUITests.swift */; };
 		8E0643C922013D5800F977DF /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0643C822013D5800F977DF /* ServiceApi.swift */; };
+		8E502FB82204EA90006208CA /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FB72204EA90006208CA /* DataRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8E0643B722013C4C00F977DF /* SkyScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyScannerUITests.swift; sourceTree = "<group>"; };
 		8E0643B922013C4C00F977DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0643C822013D5800F977DF /* ServiceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
+		8E502FB72204EA90006208CA /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		8E06439622013C4B00F977DF /* SkyScanner */ = {
 			isa = PBXGroup;
 			children = (
+				8E502FB52204EA75006208CA /* Commons */,
 				8E0643C522013C5500F977DF /* Configuration */,
 				8E06439722013C4B00F977DF /* AppDelegate.swift */,
 				8E06439922013C4B00F977DF /* ViewController.swift */,
@@ -134,6 +137,22 @@
 				8E0643C822013D5800F977DF /* ServiceApi.swift */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		8E502FB52204EA75006208CA /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FB62204EA7B006208CA /* Network */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		8E502FB62204EA7B006208CA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FB72204EA90006208CA /* DataRequest.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +289,7 @@
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
 				8E06439822013C4B00F977DF /* AppDelegate.swift in Sources */,
 				8E0643C922013D5800F977DF /* ServiceApi.swift in Sources */,
+				8E502FB82204EA90006208CA /* DataRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

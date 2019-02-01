@@ -24,7 +24,8 @@ protocol ServiceApiProtocol {
                        children: String,
                        infants: String,
                        apikey: String,
-                       success: @escaping ((String) -> Void), error: @escaping ((NSError?, Int) -> Void))
+                       onSuccess: @escaping ((String) -> Void),
+                       onFailure: @escaping ((NSError?, Int) -> Void))
 }
 class ServiceApi: ServiceApiProtocol {
     private let createSessionUrl = "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/"
@@ -42,7 +43,8 @@ class ServiceApi: ServiceApiProtocol {
                        children: String = "0",
                        infants: String = "0",
                        apikey: String,
-                        success: @escaping ((String) -> Void), error: @escaping ((NSError?, Int) -> Void)) {
+                       onSuccess: @escaping ((String) -> Void),
+                       onFailure: @escaping ((NSError?, Int) -> Void)) {
         let headers = [
             "X-Forwarded-For": "8.8.8.8",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -63,19 +65,64 @@ class ServiceApi: ServiceApiProtocol {
             "apikey":apikey
         ]
 
-        Alamofire.request(createSessionUrl, method: .post, parameters: parameters, encoding:  URLEncoding(), headers: headers).validate(statusCode: 200..<300).responseJSON { (responseJson) in
+//        self.request(type: String.self,
+//                     url: createSessionUrl,
+//                     method: .post,
+//                     parameters: parameters,
+//                     encoding: URLEncoding(),
+//                     headers: headers,
+//                     validStatusCodes: [200],
+//                     onSuccess: { (_, data, statusCode) in
+//                        if let headers = data.response?.allHeaderFields,
+//                            let urlWithSessionKey = headers["Location"] as? String {
+//                            onSuccess(urlWithSessionKey)
+//                        } else {
+//                            onFailure(nil, 0)
+//                        }
+//        }) { (error, statusCode) in
+//            onFailure(error, statusCode)
+//        }
+        Alamofire.request(createSessionUrl,
+                          method: .post,
+                          parameters: parameters,
+                          encoding:  URLEncoding(),
+                          headers: headers).validate(statusCode: 200..<300).responseJSON { (responseJson) in
             switch responseJson.result {
             case .success:
                 if let headers = responseJson.response?.allHeaderFields,
                     let urlWithSessionKey = headers["Location"] as? String {
-                    success(urlWithSessionKey)
+                    onSuccess(urlWithSessionKey)
                 }
                 else {
-                    error(nil, 0)
+                    onFailure(nil, 0)
                 }
             case .failure:
-                error(nil, responseJson.response?.statusCode ?? 0)
+                onFailure(nil, responseJson.response?.statusCode ?? 0)
             }
         }
+    }
+
+    private func request<T: Codable>( type: T.Type,
+                                      url: URLConvertible,
+                                      method: HTTPMethod,
+                                      parameters: Parameters? = nil,
+                                      encoding: ParameterEncoding = URLEncoding.default,
+                                      headers: HTTPHeaders?,
+                                      validStatusCodes: [Int],
+                                      onSuccess: @escaping ((T?, DataResponse<T>, Int?) -> Void),
+                                      onFailure: @escaping (NSError?, Int) -> Void) {
+        let sessionManager = SessionManager()
+        sessionManager.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate(statusCode: validStatusCodes)
+            .responseDecodableObject(decoder: JSONDecoder()) { (data: DataResponse<T>) in
+                let statusCode = data.response?.statusCode ?? -1
+                switch data.result {
+                case .success:
+                    onSuccess(data.result.value, data, statusCode)
+                case .failure:
+                    onFailure(data.result.error as NSError?, statusCode)
+                }
+        }
+
+
     }
 }

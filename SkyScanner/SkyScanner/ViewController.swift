@@ -14,10 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let api = ServiceApi.init()
-        api.createSession(apikey: "ss630745725358065467897349852985", success: { (data) in
+        api.createSession(apikey: "ss630745725358065467897349852985", onSuccess: { (data) in
 
-        }) { (error, statusCode) in
-            
+        }) { (error, status) in
+
         }
     }
 
