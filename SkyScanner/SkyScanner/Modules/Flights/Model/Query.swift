@@ -7,52 +7,44 @@
 //
 
 import UIKit
+import ObjectMapper
 
-struct Query: Codable {
-    let country: String
-    let currency: String
-    let locale: String
-    let adults: Int
-    let children: Int
-    let infants: Int
-    let originPlace: String
-    let destinationPlace: String
-    let outboundDate: String
-    let inboundDate: String
-    let locationSchema: String
-    let cabinClass: String
-    let groupPricing: Bool
+class Query: Mappable {
+    var country: String?
+    var currency: String?
+    var locale: String?
+    var adults: Int?
+    var children: Int?
+    var infants: Int?
+    var originPlace: String?
+    var destinationPlace: String?
+    var outboundDate: String?
+    var inboundDate: String?
+    var locationSchema: String?
+    var cabinClass: String?
+    var groupPricing: Bool?
 
-    private enum CodingKeys: String, CodingKey {
-        case country = "Country"
-        case currency = "Currency"
-        case locale = "Locale"
-        case adults = "Adults"
-        case children = "Children"
-        case infants = "Infants"
-        case originPlace = "OriginPlace"
-        case destinationPlace = "DestinationPlace"
-        case outboundDate = "OutboundDate"
-        case inboundDate = "InboundDate"
-        case locationSchema = "LocationSchema"
-        case cabinClass = "CabinClass"
-        case groupPricing = "GroupPricing"
+    init() {
+
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        country = try container.decode(String.self, forKey: .country)
-        currency = try container.decode(String.self, forKey: .currency)
-        locale = try container.decode(String.self, forKey: .locale)
-        adults = try container.decode(Int.self, forKey: .adults)
-        children = try container.decode(Int.self, forKey: .children)
-        infants = try container.decode(Int.self, forKey: .infants)
-        originPlace = try container.decode(String.self, forKey: .originPlace)
-        destinationPlace = try container.decode(String.self, forKey: .destinationPlace)
-        outboundDate = try container.decode(String.self, forKey: .outboundDate)
-        inboundDate = try container.decode(String.self, forKey: .inboundDate)
-        locationSchema = try container.decode(String.self, forKey: .locationSchema)
-        cabinClass = try container.decode(String.self, forKey: .cabinClass)
-        groupPricing = try container.decode(Bool.self, forKey: .groupPricing)
+    required init?(map: Map) {
+    }
+
+    func mapping(map: Map) {
+        country                     <-      map["Country"]
+        currency                    <-      map["Currency"]
+        locale                      <-      map["Locale"]
+        adults                      <-      map["Adults"]
+        children                    <-      map["Children"]
+        infants                     <-      map["Infants"]
+        originPlace                 <-      map["OriginPlace"]
+        destinationPlace            <-      map["DestinationPlace"]
+        outboundDate                <-      map["OutboundDate"]
+        inboundDate                 <-      map["InboundDate"]
+        locationSchema              <-      map["LocationSchema"]
+        cabinClass                  <-      map["CabinClass"]
+        groupPricing                <-      map["GroupPricing"]
+
     }
 }

@@ -7,28 +7,27 @@
 //
 
 import UIKit
+import ObjectMapper
 
-struct Carrier: Codable {
-    let id: Int
-    let code: String
-    let name: String
-    let imageUrl: String
-    let displayCode: String
+class Carrier: Mappable {
+    var id: Int?
+    var code: String?
+    var name: String?
+    var imageUrl: String?
+    var displayCode: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case code = "Code"
-        case name = "Name"
-        case imageUrl = "ImageUrl"
-        case displayCode = "DisplayCode"
+    init() {
+
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        code = try container.decode(String.self, forKey: .code)
-        name = try container.decode(String.self, forKey: .name)
-        imageUrl = try container.decode(String.self, forKey: .imageUrl)
-        displayCode = try container.decode(String.self, forKey: .displayCode)
+    required init?(map: Map) {
+    }
+
+    func mapping(map: Map) {
+        id                  <-      map["Id"]
+        code                <-      map["Code"]
+        name                <-      map["Name"]
+        imageUrl            <-      map["ImageUrl"]
+        displayCode         <-      map["DisplayCode"]
     }
 }

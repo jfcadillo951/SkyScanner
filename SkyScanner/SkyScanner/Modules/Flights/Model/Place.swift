@@ -7,28 +7,27 @@
 //
 
 import UIKit
+import ObjectMapper
 
-struct Place: Codable {
-    let id: Int
-    let parentId: Int?
-    let code: String
-    let type: String
-    let name: String
+class Place: Mappable {
+    var id: Int?
+    var parentId: Int?
+    var code: String?
+    var type: String?
+    var name: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case parentId = "ParentId"
-        case code = "Code"
-        case type = "Type"
-        case name = "Name"
+    init() {
+
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        parentId = try container.decode(Int?.self, forKey: .parentId)
-        code = try container.decode(String.self, forKey: .code)
-        type = try container.decode(String.self, forKey: .type)
-        name = try container.decode(String.self, forKey: .name)
+    required init?(map: Map) {
+    }
+
+    func mapping(map: Map) {
+        id              <-      map["Id"]
+        parentId        <-      map["ParentId"]
+        code            <-      map["Code"]
+        type            <-      map["Type"]
+        name            <-      map["Name"]
     }
 }

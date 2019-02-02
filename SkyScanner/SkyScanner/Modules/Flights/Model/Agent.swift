@@ -7,31 +7,29 @@
 //
 
 import UIKit
+import ObjectMapper
 
-struct Agent: Codable {
-    let id: Int
-    let name: String
-    let imageUrl: String
-    let status: String
-    let optimisedForMobile: Bool
-    let type: String
+class Agent: Mappable {
+    var id: Int?
+    var name: String?
+    var imageUrl: String?
+    var status: String?
+    var optimisedForMobile: Bool?
+    var type: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case id = "Id"
-        case name = "Name"
-        case imageUrl = "ImageUrl"
-        case status = "Status"
-        case optimisedForMobile = "OptimisedForMobile"
-        case type = "Type"
+    init() {
+
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        name = try container.decode(String.self, forKey: .name)
-        imageUrl = try container.decode(String.self, forKey: .imageUrl)
-        status = try container.decode(String.self, forKey: .status)
-        optimisedForMobile = try container.decode(Bool.self, forKey: .optimisedForMobile)
-        type = try container.decode(String.self, forKey: .type)
+    required init?(map: Map) {
+    }
+
+    func mapping(map: Map) {
+        id                   <-      map["Id"]
+        name                 <-      map["Name"]
+        imageUrl             <-      map["ImageUrl"]
+        status               <-      map["Status"]
+        optimisedForMobile   <-      map["OptimisedForMobile"]
+        type                 <-      map["Type"]
     }
 }

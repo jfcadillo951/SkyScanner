@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import ObjectMapper
 
-struct ServiceQuery: Codable {
-    let dateTime: String
+class ServiceQuery: Mappable {
+    var dateTime: String?
 
-    private enum CodingKeys: String, CodingKey {
-        case dateTime = "DateTime"
+    init() {
+
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        dateTime = try container.decode(String.self, forKey: .dateTime)
+    required init?(map: Map) {
+    }
+
+    func mapping(map: Map) {
+        dateTime          <-      map["DateTime"]
     }
 }

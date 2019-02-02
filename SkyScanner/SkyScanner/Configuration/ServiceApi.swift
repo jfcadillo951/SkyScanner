@@ -26,6 +26,11 @@ protocol ServiceApiProtocol {
                        apikey: String,
                        onSuccess: @escaping ((String) -> Void),
                        onFailure: @escaping ((NSError?, Int) -> Void))
+
+    func pollSession(sessionUrl: String,
+                     apiKey: String,
+                     onSuccess: @escaping ((Data) -> Void),
+                     onFailure: @escaping ((NSError?, Int) -> Void))
 }
 class ServiceApi: ServiceApiProtocol {
     private let createSessionUrl = "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/"
@@ -65,23 +70,6 @@ class ServiceApi: ServiceApiProtocol {
             "apikey":apikey
         ]
 
-//        self.request(type: String.self,
-//                     url: createSessionUrl,
-//                     method: .post,
-//                     parameters: parameters,
-//                     encoding: URLEncoding(),
-//                     headers: headers,
-//                     validStatusCodes: [200],
-//                     onSuccess: { (_, data, statusCode) in
-//                        if let headers = data.response?.allHeaderFields,
-//                            let urlWithSessionKey = headers["Location"] as? String {
-//                            onSuccess(urlWithSessionKey)
-//                        } else {
-//                            onFailure(nil, 0)
-//                        }
-//        }) { (error, statusCode) in
-//            onFailure(error, statusCode)
-//        }
         Alamofire.request(createSessionUrl,
                           method: .post,
                           parameters: parameters,
@@ -102,27 +90,27 @@ class ServiceApi: ServiceApiProtocol {
         }
     }
 
-    private func request<T: Codable>( type: T.Type,
-                                      url: URLConvertible,
-                                      method: HTTPMethod,
-                                      parameters: Parameters? = nil,
-                                      encoding: ParameterEncoding = URLEncoding.default,
-                                      headers: HTTPHeaders?,
-                                      validStatusCodes: [Int],
-                                      onSuccess: @escaping ((T?, DataResponse<T>, Int?) -> Void),
-                                      onFailure: @escaping (NSError?, Int) -> Void) {
-        let sessionManager = SessionManager()
-        sessionManager.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate(statusCode: validStatusCodes)
-            .responseDecodableObject(decoder: JSONDecoder()) { (data: DataResponse<T>) in
-                let statusCode = data.response?.statusCode ?? -1
-                switch data.result {
-                case .success:
-                    onSuccess(data.result.value, data, statusCode)
-                case .failure:
-                    onFailure(data.result.error as NSError?, statusCode)
-                }
+    func pollSession(sessionUrl: String, apiKey: String, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
+        let url = sessionUrl + "?apikey=" + apiKey
+
+        let headers = [
+            "X-Forwarded-For": "8.8.8.8",
+        ]
+        Alamofire.request(url,
+                          method: .get,
+                          encoding:  URLEncoding(),
+                          headers: headers).validate(statusCode: 200..<300).responseJSON { (responseJson) in
+                            switch responseJson.result {
+                            case .success:
+                                if let _ = String(data: (responseJson.data)!, encoding: .utf8) {
+                                    onSuccess((responseJson.data)!)
+                                }
+                                else {
+                                    onFailure(nil, 0)
+                                }
+                            case .failure:
+                                onFailure(nil, responseJson.response?.statusCode ?? 0)
+                            }
         }
-
-
     }
 }
