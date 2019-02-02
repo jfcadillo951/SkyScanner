@@ -13,6 +13,7 @@ class PollSession: Mappable {
     var sessionKey: String?
     var query: Query?
     var status: String?
+    var itiniraries: [Itinerary]?
     var legs: [Leg]?
     var segments: [Segment]?
     var carriers: [Carrier]?
@@ -32,6 +33,7 @@ class PollSession: Mappable {
         sessionKey          <-      map["SessionKey"]
         query               <-      map["Query"]
         status              <-      map["Status"]
+        itiniraries         <-      map["Itiniraries"]
         legs                <-      map["Legs"]
         segments            <-      map["Segments"]
         carriers            <-      map["Carriers"]

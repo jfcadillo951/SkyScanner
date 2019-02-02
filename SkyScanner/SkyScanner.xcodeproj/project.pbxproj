@@ -30,6 +30,12 @@
 		8E502FE822064606006208CA /* StorageInMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FE722064606006208CA /* StorageInMemory.swift */; };
 		8E502FEA220647F1006208CA /* SkyScannerKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FE9220647F1006208CA /* SkyScannerKeys.swift */; };
 		8E502FEC22064801006208CA /* SkyScannerKeysImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FEB22064801006208CA /* SkyScannerKeysImpl.swift */; };
+		8E502FEE22065818006208CA /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FED22065818006208CA /* Itinerary.swift */; };
+		8E502FF02206585E006208CA /* PricingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FEF2206585E006208CA /* PricingOption.swift */; };
+		8E502FF22206592E006208CA /* BookingDetailsLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FF12206592E006208CA /* BookingDetailsLink.swift */; };
+		8E502FF622065B19006208CA /* FlightRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FF522065B19006208CA /* FlightRepositoryTest.swift */; };
+		8E502FF922065B6E006208CA /* ServiceApiSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FF822065B6E006208CA /* ServiceApiSpy.swift */; };
+		8E5030002206629A006208CA /* GET_POLLSESION_200.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +85,12 @@
 		8E502FE722064606006208CA /* StorageInMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInMemory.swift; sourceTree = "<group>"; };
 		8E502FE9220647F1006208CA /* SkyScannerKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyScannerKeys.swift; sourceTree = "<group>"; };
 		8E502FEB22064801006208CA /* SkyScannerKeysImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyScannerKeysImpl.swift; sourceTree = "<group>"; };
+		8E502FED22065818006208CA /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
+		8E502FEF2206585E006208CA /* PricingOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingOption.swift; sourceTree = "<group>"; };
+		8E502FF12206592E006208CA /* BookingDetailsLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsLink.swift; sourceTree = "<group>"; };
+		8E502FF522065B19006208CA /* FlightRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRepositoryTest.swift; sourceTree = "<group>"; };
+		8E502FF822065B6E006208CA /* ServiceApiSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApiSpy.swift; sourceTree = "<group>"; };
+		8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GET_POLLSESION_200.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +157,7 @@
 		8E0643AB22013C4C00F977DF /* SkyScannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				8E502FF322065AE4006208CA /* Modules */,
 				8E0643AC22013C4C00F977DF /* SkyScannerTests.swift */,
 				8E0643AE22013C4C00F977DF /* Info.plist */,
 			);
@@ -183,6 +196,7 @@
 		8E502FB62204EA7B006208CA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				8E502FFE2206627B006208CA /* Data */,
 				8E502FB72204EA90006208CA /* DataRequest.swift */,
 			);
 			path = Network;
@@ -219,6 +233,9 @@
 				8E502FDD22062446006208CA /* Leg.swift */,
 				8E502FDF2206261A006208CA /* FlightNumber.swift */,
 				8E502FE1220626F0006208CA /* PollSession.swift */,
+				8E502FED22065818006208CA /* Itinerary.swift */,
+				8E502FEF2206585E006208CA /* PricingOption.swift */,
+				8E502FF12206592E006208CA /* BookingDetailsLink.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +276,39 @@
 				8E502FE722064606006208CA /* StorageInMemory.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		8E502FF322065AE4006208CA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FF722065B59006208CA /* Spies */,
+				8E502FF422065AEC006208CA /* Repository */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8E502FF422065AEC006208CA /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FF522065B19006208CA /* FlightRepositoryTest.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		8E502FF722065B59006208CA /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FF822065B6E006208CA /* ServiceApiSpy.swift */,
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
+		8E502FFE2206627B006208CA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +418,7 @@
 				8E0643A222013C4C00F977DF /* LaunchScreen.storyboard in Resources */,
 				8E06439F22013C4C00F977DF /* Assets.xcassets in Resources */,
 				8E06439D22013C4B00F977DF /* Main.storyboard in Resources */,
+				8E5030002206629A006208CA /* GET_POLLSESION_200.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,11 +445,14 @@
 			files = (
 				8E502FEC22064801006208CA /* SkyScannerKeysImpl.swift in Sources */,
 				8E502FDE22062446006208CA /* Leg.swift in Sources */,
+				8E502FEE22065818006208CA /* Itinerary.swift in Sources */,
+				8E502FF02206585E006208CA /* PricingOption.swift in Sources */,
 				8E502FE2220626F0006208CA /* PollSession.swift in Sources */,
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
 				8E502FDA2204FB9E006208CA /* Segment.swift in Sources */,
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
 				8E502FE822064606006208CA /* StorageInMemory.swift in Sources */,
+				8E502FF22206592E006208CA /* BookingDetailsLink.swift in Sources */,
 				8E06439822013C4B00F977DF /* AppDelegate.swift in Sources */,
 				8E502FEA220647F1006208CA /* SkyScannerKeys.swift in Sources */,
 				8E502FD82204FA5A006208CA /* Agent.swift in Sources */,
@@ -418,6 +472,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0643AD22013C4C00F977DF /* SkyScannerTests.swift in Sources */,
+				8E502FF922065B6E006208CA /* ServiceApiSpy.swift in Sources */,
+				8E502FF622065B19006208CA /* FlightRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
