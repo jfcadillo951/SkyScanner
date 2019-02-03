@@ -69,8 +69,9 @@ class ServiceApi: ServiceApiProtocol {
             "adults":adults,
             "children":children,
             "infants":infants,
-            "apikey":apikey
-        ]
+            "apikey":apikey,
+            "groupPricing": true
+            ] as [String : Any]
 
         Alamofire.request(createSessionUrl,
                           method: .post,

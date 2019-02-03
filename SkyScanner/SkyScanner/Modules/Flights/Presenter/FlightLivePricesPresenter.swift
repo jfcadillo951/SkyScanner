@@ -107,39 +107,11 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
         let placesDict = repo.placesDict
         let carriesDict = repo.carriersDict
         let agentsDict = repo.agentsDict
-
         var array: [ItineraryViewModel] = []
         for item in pollSession.itineraries ?? [] {
             let viewModel = ItineraryViewModel()
-            if let leg = legsDict[item.outboundLegId ?? ""],
-                let carrier = carriesDict[leg.carriers?.first ?? 0],
-                let originPlace = placesDict[leg.originStation ?? 0],
-                let destinationPlace = placesDict[leg.destinationStation ?? 0] {
-                let legViewModel = LegViewModel()
-                legViewModel.legUrl = carrier.imageUrl
-                legViewModel.segmentsCount = leg.segmentIds?.count
-                legViewModel.duration = FligthParser.parseDuration(min: leg.duration ?? 0)
-                legViewModel.originPlace = originPlace.code
-                legViewModel.destinationPlace = destinationPlace.code
-                legViewModel.timeDescription = leg.arrival
-
-                viewModel.outboundLeg = legViewModel
-            }
-            if let leg = legsDict[item.inboundLegId ?? ""],
-                let carrier = carriesDict[leg.carriers?.first ?? 0],
-                let originPlace = placesDict[leg.originStation ?? 0],
-                let destinationPlace = placesDict[leg.destinationStation ?? 0] {
-                let legViewModel = LegViewModel()
-                legViewModel.legUrl = carrier.imageUrl
-                legViewModel.segmentsCount = leg.segmentIds?.count
-                legViewModel.duration = FligthParser.parseDuration(min: leg.duration ?? 0)
-                legViewModel.originPlace = originPlace.code
-                legViewModel.destinationPlace = destinationPlace.code
-                legViewModel.timeDescription = leg.arrival
-
-                viewModel.inboundLeg = legViewModel
-            }
-
+            viewModel.outboundLeg = parseLeg(legId: item.outboundLegId ?? "", legsDict: legsDict, carriesDict: carriesDict, placesDict: placesDict)
+            viewModel.inboundLeg = parseLeg(legId: item.inboundLegId ?? "", legsDict: legsDict, carriesDict: carriesDict, placesDict: placesDict)
             let priceOption = item.pricingOptions?.sorted(by: { (a, b) -> Bool in
                 return a.price ?? 0 < b.price ?? 0
             }).first
@@ -149,5 +121,27 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
             array.append(viewModel)
         }
         return array
+    }
+
+    private func parseLeg(legId: String,
+                          legsDict: [String: Leg],
+                          carriesDict: [Int: Carrier],
+                          placesDict: [Int: Place]) -> LegViewModel? {
+
+        if let leg = legsDict[legId],
+            let carrier = carriesDict[leg.carriers?.first ?? 0],
+            let originPlace = placesDict[leg.originStation ?? 0],
+            let destinationPlace = placesDict[leg.destinationStation ?? 0] {
+            let legViewModel = LegViewModel()
+            legViewModel.legUrl = carrier.imageUrl
+            legViewModel.segmentsCount = leg.segmentIds?.count
+            legViewModel.duration = FligthParser.parseDuration(minutes: leg.duration ?? 0)
+            legViewModel.originPlace = originPlace.code
+            legViewModel.destinationPlace = destinationPlace.code
+            legViewModel.timeDescription = leg.arrival
+            return legViewModel
+        } else {
+            return nil
+        }
     }
 }

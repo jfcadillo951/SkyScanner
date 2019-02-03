@@ -212,7 +212,7 @@ class FlightRepository: FlightRepositoryProtocol {
                              pageSize: pageSize,
                              onSuccess: { [weak self] (pollSession) in
                                 guard let `self` = self else { return }
-                                self.getDicts(pollSession: pollSession)
+                                self.addPollSessionToDicts(pollSession: pollSession)
                                 onSuccess(pollSession)
         }, onFailure: { (error, statusCode) in
             onFailure(error, statusCode)
@@ -227,15 +227,15 @@ class FlightRepository: FlightRepositoryProtocol {
         agentsDict = [:]
     }
 
-    private func getDicts(pollSession: PollSession) {
-        getLegsDict(pollSession: pollSession)
-        getSegmentsDict(pollSession: pollSession)
-        getPlacesDict(pollSession: pollSession)
-        getCarriesDict(pollSession: pollSession)
-        getAgentsDict(pollSession: pollSession)
+    private func addPollSessionToDicts(pollSession: PollSession) {
+        addLegsToDict(pollSession: pollSession)
+        addSegmentsToDict(pollSession: pollSession)
+        addPlacesToDict(pollSession: pollSession)
+        addCarriesToDict(pollSession: pollSession)
+        addAgentsToDict(pollSession: pollSession)
     }
 
-    private func getLegsDict(pollSession: PollSession)  {
+    private func addLegsToDict(pollSession: PollSession)  {
         var dict: [String: Leg] = [:]
         for item in pollSession.legs ?? [] {
             dict[item.id ?? ""] = item
@@ -245,7 +245,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
     }
 
-    private func getSegmentsDict(pollSession: PollSession) {
+    private func addSegmentsToDict(pollSession: PollSession) {
         var dict: [Int: Segment] = [:]
         for item in pollSession.segments ?? [] {
             dict[item.id ?? 0] = item
@@ -255,7 +255,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
     }
 
-    private func getPlacesDict(pollSession: PollSession) {
+    private func addPlacesToDict(pollSession: PollSession) {
         var dict: [Int: Place] = [:]
         for item in pollSession.places ?? [] {
             dict[item.id ?? 0] = item
@@ -265,7 +265,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
     }
 
-    private func getCarriesDict(pollSession: PollSession) {
+    private func addCarriesToDict(pollSession: PollSession) {
         var dict: [Int: Carrier] = [:]
         for item in pollSession.carriers ?? [] {
             dict[item.id ?? 0] = item
@@ -275,7 +275,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
     }
 
-    private func getAgentsDict(pollSession: PollSession) {
+    private func addAgentsToDict(pollSession: PollSession) {
         var dict: [Int: Agent] = [:]
         for item in pollSession.agents ?? [] {
             dict[item.id ?? 0] = item
