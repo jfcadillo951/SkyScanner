@@ -42,7 +42,8 @@ class ViewController: UIViewController {
                             inbounddate: "2019-02-26",
                             adults: "1",
                             children: "0",
-                            infants: "0", onSuccess: { (pollSession) in
+                            infants: "0", pageIndex: 0, pageSize: 100,
+                            onSuccess: { (pollSession) in
 
         }) { (error, statusCode) in
 

@@ -42,6 +42,8 @@ class FlightRepositoryTest: XCTestCase {
                             adults: "test",
                             children: "test",
                             infants: "test",
+                            pageIndex: 0,
+                            pageSize: 1000,
                             onSuccess: { (pollSession) in
                                 // then
                                 XCTAssertTrue(self.apiSpy.createSessionWasCalled)

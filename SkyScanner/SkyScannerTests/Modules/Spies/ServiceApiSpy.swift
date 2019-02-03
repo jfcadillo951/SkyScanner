@@ -22,7 +22,7 @@ class ServiceApiSuccesSpy: ServiceApiProtocol {
 
     var pollSessionWasCalled = false
     var pollSessionExpectation: XCTestExpectation?
-    func pollSession(sessionUrl: String, apiKey: String, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
+    func pollSession(sessionUrl: String, apiKey: String, pageIndex: Int, pageSize: Int, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
         pollSessionWasCalled = true
         if let path = Bundle.main.path(forResource: "GET_POLLSESION_200", ofType: "json") {
             do {

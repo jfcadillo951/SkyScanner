@@ -9,7 +9,10 @@
 import UIKit
 
 protocol FlightLivePricesViewProtocol {
-    func showItineraries(viewModel: [ItineraryViewModel])
+    func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath])
+    func showLoading()
+    func dismissLoading()
+    func stopDisplayResults()
 }
 class FlightLivePricesViewController: UIViewController {
 
@@ -43,6 +46,7 @@ class FlightLivePricesViewController: UIViewController {
                                 forCellReuseIdentifier: ItineraryTableViewCell.reuseIdentifier)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.reloadData()
         presenter?.getItineraries(cabinclass: "Economy",
                                   country: "UK",
                                   currency: "GBP",
@@ -61,11 +65,23 @@ class FlightLivePricesViewController: UIViewController {
 }
 
 extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
-    func showItineraries(viewModel: [ItineraryViewModel]) {
+    func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath]) {
         self.viewModel = viewModel
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.tableView.insertRows(at: indexPaths, with: .automatic)
         }
+    }
+
+    func showLoading() {
+
+    }
+
+    func dismissLoading() {
+
+    }
+
+    func stopDisplayResults() {
+
     }
 }
 
@@ -86,7 +102,7 @@ extension FlightLivePricesViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (viewModel != nil) ? 1: 0
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.count ?? 0

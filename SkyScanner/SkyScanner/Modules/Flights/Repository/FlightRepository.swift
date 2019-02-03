@@ -21,6 +21,8 @@ protocol FlightRepositoryProtocol {
                         adults: String,
                         children: String,
                         infants: String,
+                        pageIndex: Int,
+                        pageSize: Int,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void))
 }
@@ -49,6 +51,8 @@ class FlightRepository: FlightRepositoryProtocol {
                         children: String,
                         infants: String,
                         shouldRetryOnlyOnce: Bool,
+                        pageIndex: Int,
+                        pageSize: Int,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
 
@@ -71,7 +75,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
 
         if let url = self.storage.get(key: .pollingUrl) as? String {
-            self.api.pollSession(sessionUrl: url, apiKey: appKeys.getApiKey(), onSuccess: { (data) in
+            self.api.pollSession(sessionUrl: url, apiKey: appKeys.getApiKey(), pageIndex: pageIndex, pageSize: pageSize, onSuccess: { (data) in
                 if let string = String(data: data, encoding: String.Encoding.utf8),
                     let pollSessionResponse = PollSession(JSONString: string) {
                     onSuccess(pollSessionResponse)
@@ -94,6 +98,8 @@ class FlightRepository: FlightRepositoryProtocol {
                                          adults: adults,
                                          children: children,
                                          infants: infants, shouldRetryOnlyOnce: false,
+                                         pageIndex: pageIndex,
+                                         pageSize: pageSize,
                                          onSuccess: { (pollSession) in
                                             onSuccess(pollSession)
                     }, onFailure: { (error, statusCode) in
@@ -144,7 +150,10 @@ class FlightRepository: FlightRepositoryProtocol {
                                                          inbounddate: inbounddate,
                                                          adults: adults,
                                                          children: children,
-                                                         infants: infants, shouldRetryOnlyOnce: false,
+                                                         infants: infants,
+                                                         shouldRetryOnlyOnce: false,
+                                                         pageIndex: pageIndex,
+                                                         pageSize: pageSize,
                                                          onSuccess: { (pollSession) in
                                                             onSuccess(pollSession)
                                     }, onFailure: { (error, statusCode) in
@@ -168,6 +177,8 @@ class FlightRepository: FlightRepositoryProtocol {
                         adults: String,
                         children: String,
                         infants: String,
+                        pageIndex: Int,
+                        pageSize: Int,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
         self._getItineraries(cabinclass: cabinclass,
@@ -181,7 +192,10 @@ class FlightRepository: FlightRepositoryProtocol {
                              inbounddate: inbounddate,
                              adults: adults,
                              children: children,
-                             infants: infants, shouldRetryOnlyOnce: true,
+                             infants: infants,
+                             shouldRetryOnlyOnce: true,
+                             pageIndex: pageIndex,
+                             pageSize: pageSize,
                              onSuccess: { (pollSession) in
                                 onSuccess(pollSession)
         }, onFailure: { (error, statusCode) in

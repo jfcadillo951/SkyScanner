@@ -23,12 +23,14 @@ protocol ServiceApiProtocol {
                        adults: String,
                        children: String,
                        infants: String,
-                       apikey: String,
+                       apikey: String, 
                        onSuccess: @escaping ((String) -> Void),
                        onFailure: @escaping ((NSError?, Int) -> Void))
 
     func pollSession(sessionUrl: String,
                      apiKey: String,
+                     pageIndex: Int,
+                     pageSize: Int,
                      onSuccess: @escaping ((Data) -> Void),
                      onFailure: @escaping ((NSError?, Int) -> Void))
 }
@@ -90,8 +92,8 @@ class ServiceApi: ServiceApiProtocol {
         }
     }
 
-    func pollSession(sessionUrl: String, apiKey: String, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
-        let url = sessionUrl + "?apikey=" + apiKey
+    func pollSession(sessionUrl: String, apiKey: String, pageIndex: Int, pageSize: Int, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
+        let url = sessionUrl + "?apikey=" + apiKey + "&pageIndex=" + String(pageIndex) + "&pageSize=" + String(pageSize)
 
         let headers = [
             "X-Forwarded-For": "8.8.8.8",
