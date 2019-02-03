@@ -31,8 +31,8 @@ class ItineraryTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        outBoundLegView?.customImageView.image = nil
-        inBoundLegView?.customImageView.image = nil
+        outBoundLegView?.cleanView()
+        inBoundLegView?.cleanView()
         aditionalLabel.text = ""
         priceDescriptionLabel.text = ""
     }

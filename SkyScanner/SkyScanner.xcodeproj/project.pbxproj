@@ -43,14 +43,13 @@
 		8E50300B22066525006208CA /* ItineraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50300922066525006208CA /* ItineraryTableViewCell.xib */; };
 		8E50300D220665D0006208CA /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50300C220665D0006208CA /* LegView.swift */; };
 		8E50300F220665DA006208CA /* LegView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50300E220665DA006208CA /* LegView.xib */; };
-		8E5030112206682F006208CA /* PriceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030102206682F006208CA /* PriceOptionView.swift */; };
-		8E5030132206683A006208CA /* PriceOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5030122206683A006208CA /* PriceOptionView.xib */; };
 		8E50301622066C20006208CA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301522066C20006208CA /* UIView+Extension.swift */; };
 		8E50301922068C7C006208CA /* ItineraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301822068C7C006208CA /* ItineraryViewModel.swift */; };
 		8E50301B22068CBB006208CA /* LegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301A22068CBB006208CA /* LegViewModel.swift */; };
 		8E50301E22068EBE006208CA /* FligthParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301D22068EBE006208CA /* FligthParser.swift */; };
 		8E50302122069F1F006208CA /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302022069F1F006208CA /* CustomImageView.swift */; };
 		8E5030242206AAB4006208CA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030232206AAB4006208CA /* Util.swift */; };
+		8E50302622073BE6006208CA /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302522073BE6006208CA /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,14 +112,13 @@
 		8E50300922066525006208CA /* ItineraryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryTableViewCell.xib; sourceTree = "<group>"; };
 		8E50300C220665D0006208CA /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
 		8E50300E220665DA006208CA /* LegView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegView.xib; sourceTree = "<group>"; };
-		8E5030102206682F006208CA /* PriceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceOptionView.swift; sourceTree = "<group>"; };
-		8E5030122206683A006208CA /* PriceOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceOptionView.xib; sourceTree = "<group>"; };
 		8E50301522066C20006208CA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8E50301822068C7C006208CA /* ItineraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryViewModel.swift; sourceTree = "<group>"; };
 		8E50301A22068CBB006208CA /* LegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegViewModel.swift; sourceTree = "<group>"; };
 		8E50301D22068EBE006208CA /* FligthParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FligthParser.swift; sourceTree = "<group>"; };
 		8E50302022069F1F006208CA /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		8E5030232206AAB4006208CA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		8E50302522073BE6006208CA /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,8 +355,6 @@
 				8E50300922066525006208CA /* ItineraryTableViewCell.xib */,
 				8E50300C220665D0006208CA /* LegView.swift */,
 				8E50300E220665DA006208CA /* LegView.xib */,
-				8E5030102206682F006208CA /* PriceOptionView.swift */,
-				8E5030122206683A006208CA /* PriceOptionView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -399,6 +395,7 @@
 		8E5030222206AAA7006208CA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				8E50302522073BE6006208CA /* DateHelper.swift */,
 				8E5030232206AAB4006208CA /* Util.swift */,
 			);
 			path = Helper;
@@ -511,7 +508,6 @@
 				8E0643A222013C4C00F977DF /* LaunchScreen.storyboard in Resources */,
 				8E50300622066504006208CA /* FlightLivePricesViewController.xib in Resources */,
 				8E06439F22013C4C00F977DF /* Assets.xcassets in Resources */,
-				8E5030132206683A006208CA /* PriceOptionView.xib in Resources */,
 				8E50300B22066525006208CA /* ItineraryTableViewCell.xib in Resources */,
 				8E06439D22013C4B00F977DF /* Main.storyboard in Resources */,
 				8E50300F220665DA006208CA /* LegView.xib in Resources */,
@@ -549,6 +545,7 @@
 				8E50302122069F1F006208CA /* CustomImageView.swift in Sources */,
 				8E502FE2220626F0006208CA /* PollSession.swift in Sources */,
 				8E50301922068C7C006208CA /* ItineraryViewModel.swift in Sources */,
+				8E50302622073BE6006208CA /* DateHelper.swift in Sources */,
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
 				8E502FDA2204FB9E006208CA /* Segment.swift in Sources */,
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
@@ -567,7 +564,6 @@
 				8E502FD42204F49E006208CA /* Currency.swift in Sources */,
 				8E502FE5220644E4006208CA /* FlightRepository.swift in Sources */,
 				8E50300D220665D0006208CA /* LegView.swift in Sources */,
-				8E5030112206682F006208CA /* PriceOptionView.swift in Sources */,
 				8E502FE02206261A006208CA /* FlightNumber.swift in Sources */,
 				8E0643C922013D5800F977DF /* ServiceApi.swift in Sources */,
 				8E502FD62204F50C006208CA /* Place.swift in Sources */,

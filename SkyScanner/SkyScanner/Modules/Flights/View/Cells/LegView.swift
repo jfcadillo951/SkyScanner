@@ -13,6 +13,7 @@ class LegView: UIView {
     @IBOutlet weak var customImageView: CustomImageView!
     @IBOutlet weak var segmentDescriptionLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var stationsLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +23,13 @@ class LegView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+    }
+
+    func cleanView() {
+        customImageView.image = nil
+        self.segmentDescriptionLabel.text = ""
+        self.durationLabel.text = ""
+        self.stationsLabel.text = ""
     }
 
     func setup(viewModel: LegViewModel) {
@@ -34,6 +42,7 @@ class LegView: UIView {
             // change color
         }
         self.durationLabel.text = viewModel.duration
+        self.stationsLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")
 
     }
 
