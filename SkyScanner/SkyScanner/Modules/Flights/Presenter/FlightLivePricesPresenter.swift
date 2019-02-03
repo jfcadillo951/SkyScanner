@@ -46,7 +46,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                             infants: infants,
                             onSuccess: { [weak self] (pollSession) in
                                 guard let `self` = self else { return }
-                                self.view.showItineraries(pollSession: pollSession)
+                                self.view.showItineraries(viewModel: FligthParser.parseLivePrices(pollSession: pollSession))
         }) { (error, statusCode) in
             // TODO: Show Error message
         }

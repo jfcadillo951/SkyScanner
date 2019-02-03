@@ -9,12 +9,12 @@
 import UIKit
 
 protocol FlightLivePricesViewProtocol {
-    func showItineraries(pollSession: PollSession)
+    func showItineraries(viewModel: [ItineraryViewModel])
 }
 class FlightLivePricesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var pollSession: PollSession?
+    var viewModel: [ItineraryViewModel]?
     var presenter: FlightsLivePricesPresenterProtocol?
 
     convenience init() {
@@ -61,8 +61,8 @@ class FlightLivePricesViewController: UIViewController {
 }
 
 extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
-    func showItineraries(pollSession: PollSession) {
-        self.pollSession = pollSession
+    func showItineraries(viewModel: [ItineraryViewModel]) {
+        self.viewModel = viewModel
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -80,15 +80,15 @@ extension FlightLivePricesViewController: UITableViewDelegate {
 extension FlightLivePricesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ItineraryTableViewCell.reuseIdentifier, for: indexPath) as? ItineraryTableViewCell {
-            cell.setup(data: (self.pollSession?.itineraries?[indexPath.row])!)
+            cell.setup(viewModel: (self.viewModel?[indexPath.row])!)
             return cell
         }
         return UITableViewCell()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (pollSession != nil) ? 1: 0
+        return (viewModel != nil) ? 1: 0
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pollSession?.itineraries?.count ?? 0
+        return viewModel?.count ?? 0
     }
 }

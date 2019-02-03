@@ -46,6 +46,10 @@
 		8E5030112206682F006208CA /* PriceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030102206682F006208CA /* PriceOptionView.swift */; };
 		8E5030132206683A006208CA /* PriceOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5030122206683A006208CA /* PriceOptionView.xib */; };
 		8E50301622066C20006208CA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301522066C20006208CA /* UIView+Extension.swift */; };
+		8E50301922068C7C006208CA /* ItineraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301822068C7C006208CA /* ItineraryViewModel.swift */; };
+		8E50301B22068CBB006208CA /* LegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301A22068CBB006208CA /* LegViewModel.swift */; };
+		8E50301E22068EBE006208CA /* FligthParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301D22068EBE006208CA /* FligthParser.swift */; };
+		8E50302122069F1F006208CA /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302022069F1F006208CA /* CustomImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,10 @@
 		8E5030102206682F006208CA /* PriceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceOptionView.swift; sourceTree = "<group>"; };
 		8E5030122206683A006208CA /* PriceOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceOptionView.xib; sourceTree = "<group>"; };
 		8E50301522066C20006208CA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		8E50301822068C7C006208CA /* ItineraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryViewModel.swift; sourceTree = "<group>"; };
+		8E50301A22068CBB006208CA /* LegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegViewModel.swift; sourceTree = "<group>"; };
+		8E50301D22068EBE006208CA /* FligthParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FligthParser.swift; sourceTree = "<group>"; };
+		8E50302022069F1F006208CA /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +214,7 @@
 		8E502FB52204EA75006208CA /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				8E50301F22069EE2006208CA /* Custom */,
 				8E50301422066C0E006208CA /* Extension */,
 				8E502FE6220645F1006208CA /* Storage */,
 				8E502FCE2204F311006208CA /* Models */,
@@ -234,6 +243,8 @@
 		8E502FBA2204F104006208CA /* Flights */ = {
 			isa = PBXGroup;
 			children = (
+				8E50301C22068EA7006208CA /* Parser */,
+				8E50301722068C62006208CA /* ViewModel */,
 				8E502FE3220644D6006208CA /* Repository */,
 				8E502FBD2204F138006208CA /* Presenter */,
 				8E502FBC2204F130006208CA /* View */,
@@ -355,6 +366,31 @@
 				8E50301522066C20006208CA /* UIView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8E50301722068C62006208CA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E50301822068C7C006208CA /* ItineraryViewModel.swift */,
+				8E50301A22068CBB006208CA /* LegViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E50301C22068EA7006208CA /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				8E50301D22068EBE006208CA /* FligthParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		8E50301F22069EE2006208CA /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				8E50302022069F1F006208CA /* CustomImageView.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,17 +534,21 @@
 				8E502FEE22065818006208CA /* Itinerary.swift in Sources */,
 				8E50300522066504006208CA /* FlightLivePricesViewController.swift in Sources */,
 				8E502FF02206585E006208CA /* PricingOption.swift in Sources */,
+				8E50302122069F1F006208CA /* CustomImageView.swift in Sources */,
 				8E502FE2220626F0006208CA /* PollSession.swift in Sources */,
+				8E50301922068C7C006208CA /* ItineraryViewModel.swift in Sources */,
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
 				8E502FDA2204FB9E006208CA /* Segment.swift in Sources */,
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
 				8E50300A22066525006208CA /* ItineraryTableViewCell.swift in Sources */,
+				8E50301B22068CBB006208CA /* LegViewModel.swift in Sources */,
 				8E502FE822064606006208CA /* StorageInMemory.swift in Sources */,
 				8E502FF22206592E006208CA /* BookingDetailsLink.swift in Sources */,
 				8E50301622066C20006208CA /* UIView+Extension.swift in Sources */,
 				8E06439822013C4B00F977DF /* AppDelegate.swift in Sources */,
 				8E50300222066456006208CA /* FlightLivePricesPresenter.swift in Sources */,
 				8E502FEA220647F1006208CA /* SkyScannerKeys.swift in Sources */,
+				8E50301E22068EBE006208CA /* FligthParser.swift in Sources */,
 				8E502FD82204FA5A006208CA /* Agent.swift in Sources */,
 				8E502FDC2204FDFA006208CA /* Query.swift in Sources */,
 				8E502FD02204F31E006208CA /* ServiceQuery.swift in Sources */,

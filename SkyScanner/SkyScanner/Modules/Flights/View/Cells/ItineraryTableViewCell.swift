@@ -14,15 +14,15 @@ class ItineraryTableViewCell: UITableViewCell {
     static let reuseIdentifier = "ItineraryTableViewCell"
 
     @IBOutlet weak var stackView: UIStackView!
-    var outBoundLeg: LegView?
-    var inBoundLeg: LegView?
+    var outBoundLegView: LegView?
+    var inBoundLegView: LegView?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        outBoundLeg = LegView()
-        stackView.insertArrangedSubview(outBoundLeg!, at: 0)
-        inBoundLeg = LegView()
-        if let leg = inBoundLeg {
+        outBoundLegView = LegView()
+        stackView.insertArrangedSubview(outBoundLegView!, at: 0)
+        inBoundLegView = LegView()
+        if let leg = inBoundLegView {
             stackView.removeArrangedSubview(leg)
         }
     }
@@ -37,15 +37,24 @@ class ItineraryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setup(data: Itinerary) {
-        if data.inboundLegId != nil {
-            if !stackView.arrangedSubviews.contains(inBoundLeg!) {
-                stackView.insertArrangedSubview(inBoundLeg!, at: 1)
+    func setup(viewModel: ItineraryViewModel) {
+        if viewModel.inboundLeg != nil {
+            if !stackView.arrangedSubviews.contains(inBoundLegView!) {
+                stackView.insertArrangedSubview(inBoundLegView!, at: 1)
             }
 
-        } else if stackView.arrangedSubviews.contains(inBoundLeg!) {
-            stackView.removeArrangedSubview(inBoundLeg!)
+        } else if stackView.arrangedSubviews.contains(inBoundLegView!) {
+            stackView.removeArrangedSubview(inBoundLegView!)
         }
+
+        if let leg = viewModel.outboundLeg {
+            outBoundLegView?.setup(viewModel: leg)
+        }
+
+        if let leg = viewModel.inboundLeg {
+            inBoundLegView?.setup(viewModel: leg)
+        }
+        
     }
     
 }
