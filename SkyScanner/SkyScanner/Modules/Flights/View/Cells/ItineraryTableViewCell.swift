@@ -15,7 +15,9 @@ class ItineraryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var aditionalLabel: UILabel!
-    @IBOutlet weak var priceDescriptionLabel: UILabel!
+    @IBOutlet weak var filterDescriptionLabel: UILabel!
+    @IBOutlet weak var lineSeparatorView: UIView!
+
     var outBoundLegView: LegView?
     var inBoundLegView: LegView?
 
@@ -27,20 +29,32 @@ class ItineraryTableViewCell: UITableViewCell {
         if let leg = inBoundLegView {
             stackView.removeArrangedSubview(leg)
         }
+        setStyles()
+        cleanCell()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        outBoundLegView?.cleanView()
-        inBoundLegView?.cleanView()
-        aditionalLabel.text = ""
-        priceDescriptionLabel.text = ""
+        cleanCell()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    private func setStyles() {
+        filterDescriptionLabel.font = UITheme.Fonts.subTitleFont
+        filterDescriptionLabel.textColor = UITheme.Colors.filterCellColor
+        lineSeparatorView.backgroundColor = UITheme.Colors.backgroudCellColor
+    }
+
+    private func cleanCell() {
+        outBoundLegView?.cleanView()
+        inBoundLegView?.cleanView()
+        aditionalLabel.text = ""
+        filterDescriptionLabel.text = ""
     }
 
     func setup(viewModel: ItineraryViewModel) {
@@ -60,7 +74,7 @@ class ItineraryTableViewCell: UITableViewCell {
         if let leg = viewModel.inboundLeg {
             inBoundLegView?.setup(viewModel: leg)
         }
-        priceDescriptionLabel.text = viewModel.priceDescription
+        filterDescriptionLabel.text = viewModel.priceDescription
     }
     
 }

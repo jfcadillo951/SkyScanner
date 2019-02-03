@@ -11,25 +11,41 @@ import UIKit
 class LegView: UIView {
 
     @IBOutlet weak var customImageView: CustomImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+
     @IBOutlet weak var segmentDescriptionLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var stationsLabel: UILabel!
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setStyles()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+        setStyles()
+    }
+
+    func setStyles() {
+        titleLabel.font = UITheme.Fonts.titleFont
+        titleLabel.textColor = UITheme.Colors.titleColor
+        subTitleLabel.font = UITheme.Fonts.subTitleFont
+        subTitleLabel.textColor = UITheme.Colors.subTitleColor
+        segmentDescriptionLabel.font = UITheme.Fonts.titleFont
+        segmentDescriptionLabel.textColor = UITheme.Colors.titleColor
+        durationLabel.font = UITheme.Fonts.subTitleFont
+        durationLabel.textColor = UITheme.Colors.subTitleColor
     }
 
     func cleanView() {
         customImageView.image = nil
         self.segmentDescriptionLabel.text = ""
         self.durationLabel.text = ""
-        self.stationsLabel.text = ""
+        self.titleLabel.text = ""
     }
 
     func setup(viewModel: LegViewModel) {
@@ -42,7 +58,7 @@ class LegView: UIView {
             // change color
         }
         self.durationLabel.text = viewModel.duration
-        self.stationsLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")
+        self.titleLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")
 
     }
 

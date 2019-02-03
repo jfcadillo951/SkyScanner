@@ -50,6 +50,7 @@
 		8E50302122069F1F006208CA /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302022069F1F006208CA /* CustomImageView.swift */; };
 		8E5030242206AAB4006208CA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030232206AAB4006208CA /* Util.swift */; };
 		8E50302622073BE6006208CA /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302522073BE6006208CA /* DateHelper.swift */; };
+		8E50302922075EDC006208CA /* UITheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302822075EDC006208CA /* UITheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		8E50302022069F1F006208CA /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		8E5030232206AAB4006208CA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		8E50302522073BE6006208CA /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		8E50302822075EDC006208CA /* UITheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		8E502FB52204EA75006208CA /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				8E50302722075ED2006208CA /* Theme */,
 				8E5030222206AAA7006208CA /* Helper */,
 				8E50301F22069EE2006208CA /* View */,
 				8E50301422066C0E006208CA /* Extension */,
@@ -401,6 +404,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		8E50302722075ED2006208CA /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				8E50302822075EDC006208CA /* UITheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -551,6 +562,7 @@
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
 				8E50300A22066525006208CA /* ItineraryTableViewCell.swift in Sources */,
 				8E50301B22068CBB006208CA /* LegViewModel.swift in Sources */,
+				8E50302922075EDC006208CA /* UITheme.swift in Sources */,
 				8E502FE822064606006208CA /* StorageInMemory.swift in Sources */,
 				8E502FF22206592E006208CA /* BookingDetailsLink.swift in Sources */,
 				8E50301622066C20006208CA /* UIView+Extension.swift in Sources */,

@@ -46,6 +46,7 @@ class FlightLivePricesViewController: UIViewController {
                                 forCellReuseIdentifier: ItineraryTableViewCell.reuseIdentifier)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.separatorStyle = .none
         self.tableView.reloadData()
         presenter?.getItineraries(cabinclass: "Economy",
                                   country: "UK",
