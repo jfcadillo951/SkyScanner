@@ -14,6 +14,8 @@ class ItineraryTableViewCell: UITableViewCell {
     static let reuseIdentifier = "ItineraryTableViewCell"
 
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var aditionalLabel: UILabel!
+    @IBOutlet weak var priceDescriptionLabel: UILabel!
     var outBoundLegView: LegView?
     var inBoundLegView: LegView?
 
@@ -29,6 +31,10 @@ class ItineraryTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        outBoundLegView?.customImageView.image = nil
+        inBoundLegView?.customImageView.image = nil
+        aditionalLabel.text = ""
+        priceDescriptionLabel.text = ""
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -54,7 +60,7 @@ class ItineraryTableViewCell: UITableViewCell {
         if let leg = viewModel.inboundLeg {
             inBoundLegView?.setup(viewModel: leg)
         }
-        
+        priceDescriptionLabel.text = viewModel.priceDescription
     }
     
 }

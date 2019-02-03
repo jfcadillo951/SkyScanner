@@ -29,7 +29,8 @@ class FlightRepository: FlightRepositoryProtocol {
     let api: ServiceApiProtocol
     let storage: StorageInMemoryProtocol
     let appKeys: SkyScannerKeys = SkyScannerKeysImpl()
-    
+    var sessionParameters: [String: String] = [:]
+
     init(api: ServiceApiProtocol = ServiceApi(), storage: StorageInMemoryProtocol = StorageInMemory.shared) {
         self.api = api
         self.storage = storage
@@ -50,6 +51,24 @@ class FlightRepository: FlightRepositoryProtocol {
                         shouldRetryOnlyOnce: Bool,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
+
+        var tempSessionDict: [String: String] = [:]
+        tempSessionDict["cabinclass"] = cabinclass
+        tempSessionDict["country"] = country
+        tempSessionDict["currency"] = currency
+        tempSessionDict["locale"] = locale
+        tempSessionDict["locationSchema"] = locationSchema
+        tempSessionDict["originplace"] = originplace
+        tempSessionDict["destinationplace"] = destinationplace
+        tempSessionDict["outbounddate"] = outbounddate
+        tempSessionDict["inbounddate"] = inbounddate
+        tempSessionDict["adults"] = adults
+        tempSessionDict["children"] = children
+        tempSessionDict["infants"] = infants
+
+        if !Util.compare(a: sessionParameters, b: tempSessionDict) {
+            self.storage.remove(for: .pollingUrl)
+        }
 
         if let url = self.storage.get(key: .pollingUrl) as? String {
             self.api.pollSession(sessionUrl: url, apiKey: appKeys.getApiKey(), onSuccess: { (data) in
@@ -100,6 +119,19 @@ class FlightRepository: FlightRepositoryProtocol {
                                    apikey: appKeys.getApiKey(),
                                    onSuccess: { [weak self] (pollSessionurl) in
                                     guard let `self` = self else { return }
+                                    self.sessionParameters = [:]
+                                    self.sessionParameters["cabinclass"] = cabinclass
+                                    self.sessionParameters["country"] = country
+                                    self.sessionParameters["currency"] = currency
+                                    self.sessionParameters["locale"] = locale
+                                    self.sessionParameters["locationSchema"] = locationSchema
+                                    self.sessionParameters["originplace"] = originplace
+                                    self.sessionParameters["destinationplace"] = destinationplace
+                                    self.sessionParameters["outbounddate"] = outbounddate
+                                    self.sessionParameters["inbounddate"] = inbounddate
+                                    self.sessionParameters["adults"] = adults
+                                    self.sessionParameters["children"] = children
+                                    self.sessionParameters["infants"] = infants
                                     self.storage.set(object: pollSessionurl, for: .pollingUrl)
                                     self._getItineraries(cabinclass: cabinclass,
                                                          country: country,

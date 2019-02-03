@@ -15,6 +15,7 @@ enum InMemoryKey: String {
 protocol StorageInMemoryProtocol {
     func get(key: InMemoryKey) -> Any?
     func set(object: Any,for key: InMemoryKey)
+    func remove(for key: InMemoryKey)
 }
 
 class StorageInMemory: StorageInMemoryProtocol {
@@ -29,6 +30,12 @@ class StorageInMemory: StorageInMemoryProtocol {
 
     func set(object: Any, for key: InMemoryKey) {
         dict[key.rawValue] = object
+    }
+
+    func remove(for key: InMemoryKey) {
+        if dict[key.rawValue] != nil {
+            dict.removeValue(forKey: key.rawValue)
+        }
     }
 
 }

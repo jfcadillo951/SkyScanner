@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LegView" customModule="SkyScanner" customModuleProvider="target">
             <connections>
                 <outlet property="customImageView" destination="lFV-Xf-Nu6" id="CwB-zV-tTh"/>
+                <outlet property="durationLabel" destination="oaQ-RS-aRq" id="Ibb-TL-Drs"/>
                 <outlet property="segmentDescriptionLabel" destination="6uo-BQ-nKB" id="RzL-qz-J14"/>
             </connections>
         </placeholder>

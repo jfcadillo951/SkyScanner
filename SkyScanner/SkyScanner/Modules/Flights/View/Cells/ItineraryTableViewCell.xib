@@ -95,6 +95,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="aditionalLabel" destination="cu4-aa-oxQ" id="v83-iO-MJD"/>
+                <outlet property="priceDescriptionLabel" destination="aoq-Ap-NAB" id="FFR-03-rg5"/>
                 <outlet property="stackView" destination="4xn-8M-WkP" id="Er1-de-p05"/>
             </connections>
             <point key="canvasLocation" x="138" y="192"/>

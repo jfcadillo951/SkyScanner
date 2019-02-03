@@ -12,6 +12,7 @@ class LegView: UIView {
 
     @IBOutlet weak var customImageView: CustomImageView!
     @IBOutlet weak var segmentDescriptionLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,13 +26,14 @@ class LegView: UIView {
 
     func setup(viewModel: LegViewModel) {
         customImageView.loadImageUsingUrlString(urlString: viewModel.legUrl ?? "")
-        if viewModel.segmentsCount ?? 0 == 0 {
+        if viewModel.segmentsCount ?? 0 <= 1 {
             segmentDescriptionLabel.text = "Direct"
             // change color
         } else {
             segmentDescriptionLabel.text = String((viewModel.segmentsCount ?? 0) - 1) + " stops"
             // change color
         }
+        self.durationLabel.text = viewModel.duration
 
     }
 

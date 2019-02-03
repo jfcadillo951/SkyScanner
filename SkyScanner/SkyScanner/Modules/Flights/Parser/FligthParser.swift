@@ -26,7 +26,7 @@ class FligthParser: NSObject {
                 let legViewModel = LegViewModel()
                 legViewModel.legUrl = carrier.imageUrl
                 legViewModel.segmentsCount = leg.segmentIds?.count
-                legViewModel.duration = String(leg.duration ?? 0) // TODO: Change it
+                legViewModel.duration = parseDuration(min: leg.duration ?? 0)
                 legViewModel.originPlace = originPlace.code
                 legViewModel.destinationPlace = destinationPlace.code
                 legViewModel.timeDescription = leg.arrival
@@ -40,7 +40,7 @@ class FligthParser: NSObject {
                 let legViewModel = LegViewModel()
                 legViewModel.legUrl = carrier.imageUrl
                 legViewModel.segmentsCount = leg.segmentIds?.count
-                legViewModel.duration = String(leg.duration ?? 0) // TODO: Change it
+                legViewModel.duration = parseDuration(min: leg.duration ?? 0)
                 legViewModel.originPlace = originPlace.code
                 legViewModel.destinationPlace = destinationPlace.code
                 legViewModel.timeDescription = leg.arrival
@@ -97,6 +97,22 @@ class FligthParser: NSObject {
             dict[item.id ?? 0] = item
         }
         return dict
+    }
+
+    static func parseDuration(min: Int) -> String {
+        let h = min/60
+        let resMin = min - h*60
+        var s = ""
+        if h > 0 {
+            s = String(h) + "h"
+            if resMin > 0 {
+                s = s + " "
+            }
+        }
+        if resMin > 0 {
+            s = s + String(resMin) + "min"
+        }
+        return s
     }
 
 }
