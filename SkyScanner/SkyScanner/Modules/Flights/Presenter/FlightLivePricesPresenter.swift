@@ -25,7 +25,7 @@ protocol FlightsLivePricesPresenterProtocol {
 class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
     let repo: FlightRepositoryProtocol
     let view: FlightLivePricesViewProtocol
-    let itinerariesPageSize = 40
+    let itinerariesPageSize = 1000
     var itineraries: [ItineraryViewModel] = []
 
     init(repo: FlightRepositoryProtocol = FlightRepository(), view: FlightLivePricesViewProtocol) {
@@ -52,7 +52,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                                 guard let `self` = self else { return }
                                 self.view.dismissLoading()
                                 if pollSession.itineraries?.count ?? 0 > 0 {
-                                    let itinerariesPageResult = FligthParser.parseLivePrices(pollSession: pollSession)
+                                    let itinerariesPageResult = self.parseLivePrices(pollSession: pollSession)
                                     var indexPaths: [IndexPath] = []
                                     for (index,_) in itinerariesPageResult.enumerated() {
                                         indexPaths.append(IndexPath(row: self.itineraries.count+index, section: 0))
@@ -99,5 +99,55 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                              infants: infants,
                              pageIndex: pageIndex,
                              pageSize: itinerariesPageSize)
+    }
+
+    private func parseLivePrices(pollSession: PollSession) -> [ItineraryViewModel] {
+        let legsDict = repo.legsDict
+        let segmentsDict = repo.segmentsDict
+        let placesDict = repo.placesDict
+        let carriesDict = repo.carriersDict
+        let agentsDict = repo.agentsDict
+
+        var array: [ItineraryViewModel] = []
+        for item in pollSession.itineraries ?? [] {
+            let viewModel = ItineraryViewModel()
+            if let leg = legsDict[item.outboundLegId ?? ""],
+                let carrier = carriesDict[leg.carriers?.first ?? 0],
+                let originPlace = placesDict[leg.originStation ?? 0],
+                let destinationPlace = placesDict[leg.destinationStation ?? 0] {
+                let legViewModel = LegViewModel()
+                legViewModel.legUrl = carrier.imageUrl
+                legViewModel.segmentsCount = leg.segmentIds?.count
+                legViewModel.duration = FligthParser.parseDuration(min: leg.duration ?? 0)
+                legViewModel.originPlace = originPlace.code
+                legViewModel.destinationPlace = destinationPlace.code
+                legViewModel.timeDescription = leg.arrival
+
+                viewModel.outboundLeg = legViewModel
+            }
+            if let leg = legsDict[item.inboundLegId ?? ""],
+                let carrier = carriesDict[leg.carriers?.first ?? 0],
+                let originPlace = placesDict[leg.originStation ?? 0],
+                let destinationPlace = placesDict[leg.destinationStation ?? 0] {
+                let legViewModel = LegViewModel()
+                legViewModel.legUrl = carrier.imageUrl
+                legViewModel.segmentsCount = leg.segmentIds?.count
+                legViewModel.duration = FligthParser.parseDuration(min: leg.duration ?? 0)
+                legViewModel.originPlace = originPlace.code
+                legViewModel.destinationPlace = destinationPlace.code
+                legViewModel.timeDescription = leg.arrival
+
+                viewModel.inboundLeg = legViewModel
+            }
+
+            let priceOption = item.pricingOptions?.sorted(by: { (a, b) -> Bool in
+                return a.price ?? 0 < b.price ?? 0
+            }).first
+            viewModel.aditionalString = String(priceOption?.quoteAgeInMinutes ?? 0)
+            viewModel.priceDescription = "Cheapest" + "   Shortest"
+            viewModel.finalPrice = String(priceOption?.price ?? 0.0)
+            array.append(viewModel)
+        }
+        return array
     }
 }

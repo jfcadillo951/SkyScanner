@@ -9,6 +9,12 @@
 import UIKit
 
 protocol FlightRepositoryProtocol {
+    var legsDict: [String: Leg] { get set }
+    var segmentsDict: [Int: Segment] { get set }
+    var placesDict: [Int: Place] { get set }
+    var carriersDict: [Int: Carrier] { get set }
+    var agentsDict: [Int: Agent] { get set }
+
     func getItineraries(cabinclass: String,
                         country: String,
                         currency: String,
@@ -32,6 +38,11 @@ class FlightRepository: FlightRepositoryProtocol {
     let storage: StorageInMemoryProtocol
     let appKeys: SkyScannerKeys = SkyScannerKeysImpl()
     var sessionParameters: [String: String] = [:]
+    var legsDict: [String: Leg] = [:]
+    var segmentsDict: [Int: Segment] = [:]
+    var placesDict: [Int: Place] = [:]
+    var carriersDict: [Int: Carrier] = [:]
+    var agentsDict: [Int: Agent] = [:]
 
     init(api: ServiceApiProtocol = ServiceApi(), storage: StorageInMemoryProtocol = StorageInMemory.shared) {
         self.api = api
@@ -181,6 +192,9 @@ class FlightRepository: FlightRepositoryProtocol {
                         pageSize: Int,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
+        if pageIndex == 0 {
+            self.cleanDicts()
+        }
         self._getItineraries(cabinclass: cabinclass,
                              country: country,
                              currency: currency,
@@ -196,10 +210,78 @@ class FlightRepository: FlightRepositoryProtocol {
                              shouldRetryOnlyOnce: true,
                              pageIndex: pageIndex,
                              pageSize: pageSize,
-                             onSuccess: { (pollSession) in
+                             onSuccess: { [weak self] (pollSession) in
+                                guard let `self` = self else { return }
+                                self.getDicts(pollSession: pollSession)
                                 onSuccess(pollSession)
         }, onFailure: { (error, statusCode) in
             onFailure(error, statusCode)
         })
+    }
+
+    private func cleanDicts() {
+        legsDict = [:]
+        segmentsDict = [:]
+        placesDict = [:]
+        carriersDict = [:]
+        agentsDict = [:]
+    }
+
+    private func getDicts(pollSession: PollSession) {
+        getLegsDict(pollSession: pollSession)
+        getSegmentsDict(pollSession: pollSession)
+        getPlacesDict(pollSession: pollSession)
+        getCarriesDict(pollSession: pollSession)
+        getAgentsDict(pollSession: pollSession)
+    }
+
+    private func getLegsDict(pollSession: PollSession)  {
+        var dict: [String: Leg] = [:]
+        for item in pollSession.legs ?? [] {
+            dict[item.id ?? ""] = item
+        }
+        for item in dict {
+            legsDict[item.key] = item.value
+        }
+    }
+
+    private func getSegmentsDict(pollSession: PollSession) {
+        var dict: [Int: Segment] = [:]
+        for item in pollSession.segments ?? [] {
+            dict[item.id ?? 0] = item
+        }
+        for item in dict {
+            segmentsDict[item.key] = item.value
+        }
+    }
+
+    private func getPlacesDict(pollSession: PollSession) {
+        var dict: [Int: Place] = [:]
+        for item in pollSession.places ?? [] {
+            dict[item.id ?? 0] = item
+        }
+        for item in dict {
+            placesDict[item.key] = item.value
+        }
+    }
+
+    private func getCarriesDict(pollSession: PollSession) {
+        var dict: [Int: Carrier] = [:]
+        for item in pollSession.carriers ?? [] {
+            dict[item.id ?? 0] = item
+        }
+        for item in dict {
+            carriersDict[item.key] = item.value
+        }
+    }
+
+    private func getAgentsDict(pollSession: PollSession) {
+        var dict: [Int: Agent] = [:]
+        for item in pollSession.agents ?? [] {
+            dict[item.id ?? 0] = item
+        }
+        for item in dict {
+            agentsDict[item.key] = item.value
+        }
     }
 }

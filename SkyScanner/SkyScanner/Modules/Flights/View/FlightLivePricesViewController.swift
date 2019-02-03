@@ -68,7 +68,7 @@ extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
     func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath]) {
         self.viewModel = viewModel
         DispatchQueue.main.async {
-            self.tableView.insertRows(at: indexPaths, with: .automatic)
+            self.tableView.insertRows(at: indexPaths, with: .none)
         }
     }
 
