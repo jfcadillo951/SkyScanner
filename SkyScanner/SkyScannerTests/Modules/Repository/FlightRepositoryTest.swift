@@ -30,7 +30,7 @@ class FlightRepositoryTest: XCTestCase {
         apiSpy.pollSessionExpectation = expectation(description: "pollSessionItinitariesSuccessExpectation")
 
         // when
-        repo.getItiniraries(cabinclass: "test",
+        repo.getItineraries(cabinclass: "test",
                             country: "test",
                             currency: "test",
                             locale: "test",

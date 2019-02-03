@@ -36,6 +36,16 @@
 		8E502FF622065B19006208CA /* FlightRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FF522065B19006208CA /* FlightRepositoryTest.swift */; };
 		8E502FF922065B6E006208CA /* ServiceApiSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FF822065B6E006208CA /* ServiceApiSpy.swift */; };
 		8E5030002206629A006208CA /* GET_POLLSESION_200.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */; };
+		8E50300222066456006208CA /* FlightLivePricesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50300122066456006208CA /* FlightLivePricesPresenter.swift */; };
+		8E50300522066504006208CA /* FlightLivePricesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50300322066504006208CA /* FlightLivePricesViewController.swift */; };
+		8E50300622066504006208CA /* FlightLivePricesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50300422066504006208CA /* FlightLivePricesViewController.xib */; };
+		8E50300A22066525006208CA /* ItineraryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50300822066525006208CA /* ItineraryTableViewCell.swift */; };
+		8E50300B22066525006208CA /* ItineraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50300922066525006208CA /* ItineraryTableViewCell.xib */; };
+		8E50300D220665D0006208CA /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50300C220665D0006208CA /* LegView.swift */; };
+		8E50300F220665DA006208CA /* LegView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50300E220665DA006208CA /* LegView.xib */; };
+		8E5030112206682F006208CA /* PriceOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030102206682F006208CA /* PriceOptionView.swift */; };
+		8E5030132206683A006208CA /* PriceOptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5030122206683A006208CA /* PriceOptionView.xib */; };
+		8E50301622066C20006208CA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50301522066C20006208CA /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +101,16 @@
 		8E502FF522065B19006208CA /* FlightRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRepositoryTest.swift; sourceTree = "<group>"; };
 		8E502FF822065B6E006208CA /* ServiceApiSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApiSpy.swift; sourceTree = "<group>"; };
 		8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GET_POLLSESION_200.json; sourceTree = "<group>"; };
+		8E50300122066456006208CA /* FlightLivePricesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLivePricesPresenter.swift; sourceTree = "<group>"; };
+		8E50300322066504006208CA /* FlightLivePricesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLivePricesViewController.swift; sourceTree = "<group>"; };
+		8E50300422066504006208CA /* FlightLivePricesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlightLivePricesViewController.xib; sourceTree = "<group>"; };
+		8E50300822066525006208CA /* ItineraryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryTableViewCell.swift; sourceTree = "<group>"; };
+		8E50300922066525006208CA /* ItineraryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryTableViewCell.xib; sourceTree = "<group>"; };
+		8E50300C220665D0006208CA /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
+		8E50300E220665DA006208CA /* LegView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegView.xib; sourceTree = "<group>"; };
+		8E5030102206682F006208CA /* PriceOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceOptionView.swift; sourceTree = "<group>"; };
+		8E5030122206683A006208CA /* PriceOptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceOptionView.xib; sourceTree = "<group>"; };
+		8E50301522066C20006208CA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +206,7 @@
 		8E502FB52204EA75006208CA /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				8E50301422066C0E006208CA /* Extension */,
 				8E502FE6220645F1006208CA /* Storage */,
 				8E502FCE2204F311006208CA /* Models */,
 				8E502FB62204EA7B006208CA /* Network */,
@@ -243,6 +264,9 @@
 		8E502FBC2204F130006208CA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E5030072206650A006208CA /* Cells */,
+				8E50300322066504006208CA /* FlightLivePricesViewController.swift */,
+				8E50300422066504006208CA /* FlightLivePricesViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -250,6 +274,7 @@
 		8E502FBD2204F138006208CA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				8E50300122066456006208CA /* FlightLivePricesPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -309,6 +334,27 @@
 				8E502FFF2206629A006208CA /* GET_POLLSESION_200.json */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		8E5030072206650A006208CA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8E50300822066525006208CA /* ItineraryTableViewCell.swift */,
+				8E50300922066525006208CA /* ItineraryTableViewCell.xib */,
+				8E50300C220665D0006208CA /* LegView.swift */,
+				8E50300E220665DA006208CA /* LegView.xib */,
+				8E5030102206682F006208CA /* PriceOptionView.swift */,
+				8E5030122206683A006208CA /* PriceOptionView.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8E50301422066C0E006208CA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8E50301522066C20006208CA /* UIView+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,8 +462,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0643A222013C4C00F977DF /* LaunchScreen.storyboard in Resources */,
+				8E50300622066504006208CA /* FlightLivePricesViewController.xib in Resources */,
 				8E06439F22013C4C00F977DF /* Assets.xcassets in Resources */,
+				8E5030132206683A006208CA /* PriceOptionView.xib in Resources */,
+				8E50300B22066525006208CA /* ItineraryTableViewCell.xib in Resources */,
 				8E06439D22013C4B00F977DF /* Main.storyboard in Resources */,
+				8E50300F220665DA006208CA /* LegView.xib in Resources */,
 				8E5030002206629A006208CA /* GET_POLLSESION_200.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,20 +496,26 @@
 				8E502FEC22064801006208CA /* SkyScannerKeysImpl.swift in Sources */,
 				8E502FDE22062446006208CA /* Leg.swift in Sources */,
 				8E502FEE22065818006208CA /* Itinerary.swift in Sources */,
+				8E50300522066504006208CA /* FlightLivePricesViewController.swift in Sources */,
 				8E502FF02206585E006208CA /* PricingOption.swift in Sources */,
 				8E502FE2220626F0006208CA /* PollSession.swift in Sources */,
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
 				8E502FDA2204FB9E006208CA /* Segment.swift in Sources */,
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
+				8E50300A22066525006208CA /* ItineraryTableViewCell.swift in Sources */,
 				8E502FE822064606006208CA /* StorageInMemory.swift in Sources */,
 				8E502FF22206592E006208CA /* BookingDetailsLink.swift in Sources */,
+				8E50301622066C20006208CA /* UIView+Extension.swift in Sources */,
 				8E06439822013C4B00F977DF /* AppDelegate.swift in Sources */,
+				8E50300222066456006208CA /* FlightLivePricesPresenter.swift in Sources */,
 				8E502FEA220647F1006208CA /* SkyScannerKeys.swift in Sources */,
 				8E502FD82204FA5A006208CA /* Agent.swift in Sources */,
 				8E502FDC2204FDFA006208CA /* Query.swift in Sources */,
 				8E502FD02204F31E006208CA /* ServiceQuery.swift in Sources */,
 				8E502FD42204F49E006208CA /* Currency.swift in Sources */,
 				8E502FE5220644E4006208CA /* FlightRepository.swift in Sources */,
+				8E50300D220665D0006208CA /* LegView.swift in Sources */,
+				8E5030112206682F006208CA /* PriceOptionView.swift in Sources */,
 				8E502FE02206261A006208CA /* FlightNumber.swift in Sources */,
 				8E0643C922013D5800F977DF /* ServiceApi.swift in Sources */,
 				8E502FD62204F50C006208CA /* Place.swift in Sources */,

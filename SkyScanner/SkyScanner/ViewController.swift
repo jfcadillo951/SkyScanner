@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 //
 //        }
 
-        repo.getItiniraries(cabinclass: "Economy",
+        repo.getItineraries(cabinclass: "Economy",
                             country: "UK",
                             currency: "GBP",
                             locale: "en-GB",

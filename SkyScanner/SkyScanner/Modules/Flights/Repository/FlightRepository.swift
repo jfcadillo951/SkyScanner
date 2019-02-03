@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FlightRepositoryProtocol {
-    func getItiniraries(cabinclass: String,
+    func getItineraries(cabinclass: String,
                         country: String,
                         currency: String,
                         locale: String,
@@ -35,7 +35,7 @@ class FlightRepository: FlightRepositoryProtocol {
         self.storage = storage
     }
 
-    private func _getItiniraries(cabinclass: String,
+    private func _getItineraries(cabinclass: String,
                         country: String,
                         currency: String,
                         locale: String,
@@ -63,7 +63,7 @@ class FlightRepository: FlightRepositoryProtocol {
             }) { [weak self] (error, statusCode) in
                 guard let `self` = self else { return }
                 if statusCode == 410 && shouldRetryOnlyOnce {
-                    self._getItiniraries(cabinclass: cabinclass,
+                    self._getItineraries(cabinclass: cabinclass,
                                          country: country,
                                          currency: currency,
                                          locale: locale,
@@ -101,7 +101,7 @@ class FlightRepository: FlightRepositoryProtocol {
                                    onSuccess: { [weak self] (pollSessionurl) in
                                     guard let `self` = self else { return }
                                     self.storage.set(object: pollSessionurl, for: .pollingUrl)
-                                    self._getItiniraries(cabinclass: cabinclass,
+                                    self._getItineraries(cabinclass: cabinclass,
                                                          country: country,
                                                          currency: currency,
                                                          locale: locale,
@@ -124,7 +124,7 @@ class FlightRepository: FlightRepositoryProtocol {
         }
     }
 
-    func getItiniraries(cabinclass: String,
+    func getItineraries(cabinclass: String,
                         country: String,
                         currency: String,
                         locale: String,
@@ -138,7 +138,7 @@ class FlightRepository: FlightRepositoryProtocol {
                         infants: String,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
-        self._getItiniraries(cabinclass: cabinclass,
+        self._getItineraries(cabinclass: cabinclass,
                              country: country,
                              currency: currency,
                              locale: locale,
@@ -149,7 +149,7 @@ class FlightRepository: FlightRepositoryProtocol {
                              inbounddate: inbounddate,
                              adults: adults,
                              children: children,
-                             infants: infants, shouldRetryOnlyOnce: false,
+                             infants: infants, shouldRetryOnlyOnce: true,
                              onSuccess: { (pollSession) in
                                 onSuccess(pollSession)
         }, onFailure: { (error, statusCode) in
