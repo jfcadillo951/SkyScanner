@@ -16,6 +16,7 @@ protocol FlightLivePricesViewProtocol {
 }
 class FlightLivePricesViewController: UIViewController {
 
+    @IBOutlet weak var navigationViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     var viewModel: [ItineraryViewModel]?
     var presenter: FlightsLivePricesPresenterProtocol?
@@ -42,6 +43,8 @@ class FlightLivePricesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationViewHeightConstraint.constant = 87 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0.0)
         self.tableView.register(UINib(nibName: ItineraryTableViewCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: ItineraryTableViewCell.reuseIdentifier)
         self.tableView.delegate = self
