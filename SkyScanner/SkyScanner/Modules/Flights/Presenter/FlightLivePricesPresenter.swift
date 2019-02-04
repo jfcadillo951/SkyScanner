@@ -141,6 +141,8 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
         let placesDict = repo.placesDict
         let carriesDict = repo.carriersDict
         let agentsDict = repo.agentsDict
+        let currencyDict = repo.currencyDict
+
         var array: [ItineraryViewModel] = []
         for item in pollSession.itineraries ?? [] {
             let viewModel = ItineraryViewModel()
@@ -151,7 +153,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
             }).first
             viewModel.aditionalString = String(priceOption?.quoteAgeInMinutes ?? 0)
             viewModel.priceDescription = "Cheapest" + "   Shortest"
-            viewModel.finalPrice = String(priceOption?.price ?? 0.0)
+            viewModel.finalPrice = priceOption?.price?.displayAsString(with: (currencyDict.first)!.value)
             array.append(viewModel)
         }
         return array

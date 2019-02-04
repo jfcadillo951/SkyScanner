@@ -19,6 +19,7 @@ class ItineraryTableViewCell: UITableViewCell {
     @IBOutlet weak var filterDescriptionLabel: UILabel!
     @IBOutlet weak var lineSeparatorView: UIView!
 
+    @IBOutlet weak var finalPriceLabel: UILabel!
     var outBoundLegView: LegView?
     var inBoundLegView: LegView?
 
@@ -46,6 +47,8 @@ class ItineraryTableViewCell: UITableViewCell {
         filterDescriptionLabel.font = UITheme.Fonts.subTitleFont
         filterDescriptionLabel.textColor = UITheme.Colors.filterCellColor
         lineSeparatorView.backgroundColor = UITheme.Colors.backgroudCellColor
+        finalPriceLabel.font = UITheme.Fonts.titleFont
+        finalPriceLabel.textColor = UITheme.Colors.titleColor
     }
 
     private func cleanCell() {
@@ -73,12 +76,17 @@ class ItineraryTableViewCell: UITableViewCell {
             inBoundLegView?.setup(viewModel: leg)
         }
         filterDescriptionLabel.text = viewModel.priceDescription
+        finalPriceLabel.text = viewModel.finalPrice
     }
 
     func setup(viewModel: ItineraryViewModel) {
         if viewModel.isSkeleton {
+            if !stackView.arrangedSubviews.contains(inBoundLegView!) {
+                stackView.insertArrangedSubview(inBoundLegView!, at: 1)
+            }
             aditionalLabel.showAnimatedSkeleton()
             filterDescriptionLabel.showAnimatedSkeleton()
+            finalPriceLabel.showAnimatedSkeleton()
             if let leg = viewModel.outboundLeg {
                 outBoundLegView?.setup(viewModel: leg)
             }
@@ -88,13 +96,9 @@ class ItineraryTableViewCell: UITableViewCell {
         } else {
             aditionalLabel.hideSkeleton()
             filterDescriptionLabel.hideSkeleton()
+            finalPriceLabel.hideSkeleton()
             _setup(viewModel: viewModel)
         }
-
-    }
-
-
-    func showAnimation() {
 
     }
     

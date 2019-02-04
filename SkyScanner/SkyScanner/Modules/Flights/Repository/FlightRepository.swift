@@ -14,6 +14,7 @@ protocol FlightRepositoryProtocol {
     var placesDict: [Int: Place] { get set }
     var carriersDict: [Int: Carrier] { get set }
     var agentsDict: [Int: Agent] { get set }
+    var currencyDict: [String: Currency] { get set }
 
     func getItineraries(cabinclass: String,
                         country: String,
@@ -45,6 +46,7 @@ class FlightRepository: FlightRepositoryProtocol {
     var placesDict: [Int: Place] = [:]
     var carriersDict: [Int: Carrier] = [:]
     var agentsDict: [Int: Agent] = [:]
+    var currencyDict: [String: Currency] = [:]
 
     init(api: ServiceApiProtocol = ServiceApi(), storage: StorageInMemoryProtocol = StorageInMemory.shared) {
         self.api = api
@@ -243,6 +245,7 @@ class FlightRepository: FlightRepositoryProtocol {
         placesDict = [:]
         carriersDict = [:]
         agentsDict = [:]
+        currencyDict = [:]
     }
 
     private func addPollSessionToDicts(pollSession: PollSession) {
@@ -251,6 +254,7 @@ class FlightRepository: FlightRepositoryProtocol {
         addPlacesToDict(pollSession: pollSession)
         addCarriesToDict(pollSession: pollSession)
         addAgentsToDict(pollSession: pollSession)
+        addCurrenciesToDict(pollSession: pollSession)
     }
 
     private func addLegsToDict(pollSession: PollSession)  {
@@ -300,6 +304,16 @@ class FlightRepository: FlightRepositoryProtocol {
         }
         for item in dict {
             agentsDict[item.key] = item.value
+        }
+    }
+
+    private func addCurrenciesToDict(pollSession: PollSession) {
+        var dict: [String: Currency] = [:]
+        for item in pollSession.currencies ?? [] {
+            dict[item.code ?? ""] = item
+        }
+        for item in dict {
+            currencyDict[item.key] = item.value
         }
     }
 }

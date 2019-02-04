@@ -55,6 +55,7 @@ class FlightLivePricesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationTitleLabel.text = "London to Madrid"
         self.navigationTitleLabel.font = UITheme.Fonts.titleFont
         self.navigationTitleLabel.textColor = UITheme.Colors.titleColor
         self.navigationSubTitleLabel.font = UITheme.Fonts.subTitleFont
@@ -93,8 +94,8 @@ class FlightLivePricesViewController: UIViewController {
                                             currency: "GBP",
                                             locale: "en-GB",
                                             locationSchema: "iata",
-                                            originplace: "MAD",
-                                            destinationplace: "LHR",
+                                            originplace: "LHR",
+                                            destinationplace: "MAD",
                                             outbounddate: "2019-02-25",
                                             inbounddate: "2019-02-26",
                                             adults: "1",
