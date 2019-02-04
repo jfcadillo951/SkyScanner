@@ -51,6 +51,13 @@
 		8E5030242206AAB4006208CA /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030232206AAB4006208CA /* Util.swift */; };
 		8E50302622073BE6006208CA /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302522073BE6006208CA /* DateHelper.swift */; };
 		8E50302922075EDC006208CA /* UITheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302822075EDC006208CA /* UITheme.swift */; };
+		8E50302E2207D68B006208CA /* StringConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50302D2207D68B006208CA /* StringConstant.swift */; };
+		8E5030312207E5C4006208CA /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030302207E5C4006208CA /* RootTabBarController.swift */; };
+		8E5030332207E83D006208CA /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030322207E83D006208CA /* CustomNavigationController.swift */; };
+		8E50303A2207EB1E006208CA /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5030382207EB1E006208CA /* ExploreViewController.swift */; };
+		8E50303B2207EB1E006208CA /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5030392207EB1E006208CA /* ExploreViewController.xib */; };
+		8E5030402207EB67006208CA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50303E2207EB67006208CA /* UserViewController.swift */; };
+		8E5030412207EB67006208CA /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E50303F2207EB67006208CA /* UserViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +128,13 @@
 		8E5030232206AAB4006208CA /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		8E50302522073BE6006208CA /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		8E50302822075EDC006208CA /* UITheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITheme.swift; sourceTree = "<group>"; };
+		8E50302D2207D68B006208CA /* StringConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstant.swift; sourceTree = "<group>"; };
+		8E5030302207E5C4006208CA /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
+		8E5030322207E83D006208CA /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		8E5030382207EB1E006208CA /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		8E5030392207EB1E006208CA /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
+		8E50303E2207EB67006208CA /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8E50303F2207EB67006208CA /* UserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +230,7 @@
 		8E502FB52204EA75006208CA /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				8E50302C2207D673006208CA /* String */,
 				8E50302722075ED2006208CA /* Theme */,
 				8E5030222206AAA7006208CA /* Helper */,
 				8E50301F22069EE2006208CA /* View */,
@@ -239,6 +254,9 @@
 		8E502FB92204F0FC006208CA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8E5030352207EA7A006208CA /* User */,
+				8E5030342207EA55006208CA /* Explore */,
+				8E50302F2207E5A4006208CA /* Root */,
 				8E502FBA2204F104006208CA /* Flights */,
 			);
 			path = Modules;
@@ -412,6 +430,57 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		8E50302C2207D673006208CA /* String */ = {
+			isa = PBXGroup;
+			children = (
+				8E50302D2207D68B006208CA /* StringConstant.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		8E50302F2207E5A4006208CA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				8E5030302207E5C4006208CA /* RootTabBarController.swift */,
+				8E5030322207E83D006208CA /* CustomNavigationController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		8E5030342207EA55006208CA /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				8E5030362207EA9C006208CA /* View */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		8E5030352207EA7A006208CA /* User */ = {
+			isa = PBXGroup;
+			children = (
+				8E5030372207EAA7006208CA /* View */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		8E5030362207EA9C006208CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E5030382207EB1E006208CA /* ExploreViewController.swift */,
+				8E5030392207EB1E006208CA /* ExploreViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E5030372207EAA7006208CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E50303E2207EB67006208CA /* UserViewController.swift */,
+				8E50303F2207EB67006208CA /* UserViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -516,6 +585,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E50303B2207EB1E006208CA /* ExploreViewController.xib in Resources */,
+				8E5030412207EB67006208CA /* UserViewController.xib in Resources */,
 				8E0643A222013C4C00F977DF /* LaunchScreen.storyboard in Resources */,
 				8E50300622066504006208CA /* FlightLivePricesViewController.xib in Resources */,
 				8E06439F22013C4C00F977DF /* Assets.xcassets in Resources */,
@@ -557,9 +628,12 @@
 				8E502FE2220626F0006208CA /* PollSession.swift in Sources */,
 				8E50301922068C7C006208CA /* ItineraryViewModel.swift in Sources */,
 				8E50302622073BE6006208CA /* DateHelper.swift in Sources */,
+				8E5030312207E5C4006208CA /* RootTabBarController.swift in Sources */,
 				8E06439A22013C4B00F977DF /* ViewController.swift in Sources */,
+				8E5030332207E83D006208CA /* CustomNavigationController.swift in Sources */,
 				8E502FDA2204FB9E006208CA /* Segment.swift in Sources */,
 				8E502FD22204F388006208CA /* Carrier.swift in Sources */,
+				8E50303A2207EB1E006208CA /* ExploreViewController.swift in Sources */,
 				8E50300A22066525006208CA /* ItineraryTableViewCell.swift in Sources */,
 				8E50301B22068CBB006208CA /* LegViewModel.swift in Sources */,
 				8E50302922075EDC006208CA /* UITheme.swift in Sources */,
@@ -579,7 +653,9 @@
 				8E502FE02206261A006208CA /* FlightNumber.swift in Sources */,
 				8E0643C922013D5800F977DF /* ServiceApi.swift in Sources */,
 				8E502FD62204F50C006208CA /* Place.swift in Sources */,
+				8E50302E2207D68B006208CA /* StringConstant.swift in Sources */,
 				8E502FB82204EA90006208CA /* DataRequest.swift in Sources */,
+				8E5030402207EB67006208CA /* UserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

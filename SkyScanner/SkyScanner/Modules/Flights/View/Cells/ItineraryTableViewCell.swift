@@ -26,9 +26,6 @@ class ItineraryTableViewCell: UITableViewCell {
         outBoundLegView = LegView()
         stackView.insertArrangedSubview(outBoundLegView!, at: 0)
         inBoundLegView = LegView()
-        if let leg = inBoundLegView {
-            stackView.removeArrangedSubview(leg)
-        }
         setStyles()
         cleanCell()
     }

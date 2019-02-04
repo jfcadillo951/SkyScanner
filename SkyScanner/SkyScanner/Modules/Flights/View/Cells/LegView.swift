@@ -51,11 +51,14 @@ class LegView: UIView {
     func setup(viewModel: LegViewModel) {
         customImageView.loadImageUsingUrlString(urlString: viewModel.legUrl ?? "")
         if viewModel.segmentsCount ?? 0 <= 1 {
-            segmentDescriptionLabel.text = "Direct"
+            segmentDescriptionLabel.text = StringConstant.directFlight
             // change color
+            segmentDescriptionLabel.textColor = UITheme.Colors.titleColor
         } else {
-            segmentDescriptionLabel.text = String((viewModel.segmentsCount ?? 0) - 1) + " stops"
+            let numStops = (viewModel.segmentsCount ?? 0) - 1
+            segmentDescriptionLabel.text = String.init(format: StringConstant.stopsFlight, numStops)
             // change color
+            segmentDescriptionLabel.textColor = UITheme.Colors.redColor
         }
         self.durationLabel.text = viewModel.duration
         self.titleLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")

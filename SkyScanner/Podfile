@@ -6,6 +6,7 @@ target 'SkyScanner' do
   use_frameworks!
   pod 'Alamofire', '~> 4.7.1'
   pod 'AlamofireObjectMapper', '~> 5.2'
+  pod 'JGProgressHUD'
   # Pods for SkyScanner
 
   target 'SkyScannerTests' do

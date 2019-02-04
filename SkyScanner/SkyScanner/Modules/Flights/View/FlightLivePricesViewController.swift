@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 protocol FlightLivePricesViewProtocol {
     func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath])
@@ -16,10 +17,15 @@ protocol FlightLivePricesViewProtocol {
 }
 class FlightLivePricesViewController: UIViewController {
 
-    @IBOutlet weak var navigationViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     var viewModel: [ItineraryViewModel]?
     var presenter: FlightsLivePricesPresenterProtocol?
+    @IBOutlet weak var navigationTitleLabel: UILabel!
+    @IBOutlet weak var navigationSubTitleLabel: UILabel!
+    @IBOutlet weak var navigationDescriptionLabel: UILabel!
+    @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var filterButton: UIButton!
+    var hud: JGProgressHUD?
 
     convenience init() {
         self.init(nibName: "FlightLivePricesViewController", bundle: nil)
@@ -43,8 +49,28 @@ class FlightLivePricesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationViewHeightConstraint.constant = 87 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0.0)
+        self.navigationTitleLabel.font = UITheme.Fonts.titleFont
+        self.navigationTitleLabel.textColor = UITheme.Colors.titleColor
+        self.navigationSubTitleLabel.font = UITheme.Fonts.subTitleFont
+        self.navigationSubTitleLabel.textColor = UITheme.Colors.subTitleColor
+        self.navigationDescriptionLabel.font = UITheme.Fonts.subTitleFont
+        self.navigationDescriptionLabel.textColor = UITheme.Colors.subTitleColor
+        self.sortButton.titleLabel?.font = UITheme.Fonts.subTitleFont
+        self.sortButton.setTitleColor(UITheme.Colors.optionColor, for: .normal)
+        self.sortButton.setTitleColor(UITheme.Colors.optionColor, for: .selected)
+        self.sortButton.setTitleColor(UITheme.Colors.optionColor, for: .highlighted)
+        self.filterButton.titleLabel?.font = UITheme.Fonts.subTitleFont
+        self.filterButton.setTitleColor(UITheme.Colors.optionColor, for: .normal)
+        self.filterButton.setTitleColor(UITheme.Colors.optionColor, for: .selected)
+        self.filterButton.setTitleColor(UITheme.Colors.optionColor, for: .highlighted)
+        self.sortButton.setTitle(StringConstant.sortOption, for: .normal)
+        self.sortButton.setTitle(StringConstant.sortOption, for: .selected)
+        self.sortButton.setTitle(StringConstant.sortOption, for: .highlighted)
+
+        self.filterButton.setTitle(StringConstant.filterOption, for: .normal)
+        self.filterButton.setTitle(StringConstant.filterOption, for: .selected)
+        self.filterButton.setTitle(StringConstant.filterOption, for: .highlighted)
+
         self.tableView.register(UINib(nibName: ItineraryTableViewCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: ItineraryTableViewCell.reuseIdentifier)
         self.tableView.delegate = self
@@ -72,16 +98,25 @@ extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
     func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath]) {
         self.viewModel = viewModel
         DispatchQueue.main.async {
+            self.navigationDescriptionLabel.text = String(format: StringConstant.results, viewModel.count, viewModel.count)
             self.tableView.insertRows(at: indexPaths, with: .none)
         }
     }
 
     func showLoading() {
-
+        DispatchQueue.main.async {
+            self.hud?.removeFromSuperview()
+            self.hud = JGProgressHUD(style: .dark)
+            self.hud?.textLabel.text = StringConstant.loading
+            self.hud?.show(in: self.view)
+            self.navigationDescriptionLabel.text = StringConstant.loading
+        }
     }
 
     func dismissLoading() {
-
+        DispatchQueue.main.async {
+            self.hud?.dismiss(animated: true)
+        }
     }
 
     func stopDisplayResults() {

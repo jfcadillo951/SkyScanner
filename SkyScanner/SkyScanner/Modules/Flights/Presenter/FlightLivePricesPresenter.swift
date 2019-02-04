@@ -84,6 +84,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
     }
 
     func getItineraries(cabinclass: String, country: String, currency: String, locale: String, locationSchema: String, originplace: String, destinationplace: String, outbounddate: String, inbounddate: String, adults: String, children: String, infants: String) {
+        self.view.showLoading()
         let pageIndex = 0
         self._getItineraries(cabinclass: cabinclass,
                              country: country,
