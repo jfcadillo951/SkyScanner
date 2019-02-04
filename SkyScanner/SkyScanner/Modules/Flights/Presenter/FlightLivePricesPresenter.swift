@@ -21,19 +21,38 @@ protocol FlightsLivePricesPresenterProtocol {
                         adults: String,
                         children: String,
                         infants: String)
+    func displaySortOptions(in point: CGPoint)
 }
 class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
     let repo: FlightRepositoryProtocol
     let view: FlightLivePricesViewProtocol
     let itinerariesPageSize = 1000
     var itineraries: [ItineraryViewModel] = []
+    var sortOptions: [SortOptionViewModel] = []
+    var selectedSortOptionIndex: Int = 0
 
     init(repo: FlightRepositoryProtocol = FlightRepository(), view: FlightLivePricesViewProtocol) {
         self.repo = repo
         self.view = view
+        getSortOptions()
     }
 
-    private func _getItineraries(cabinclass: String, country: String, currency: String, locale: String, locationSchema: String, originplace: String, destinationplace: String, outbounddate: String, inbounddate: String, adults: String, children: String, infants: String, pageIndex: Int, pageSize: Int) {
+    private func _getItineraries(cabinclass: String,
+                                 country: String,
+                                 currency: String,
+                                 locale: String,
+                                 locationSchema: String,
+                                 originplace: String,
+                                 destinationplace: String,
+                                 outbounddate: String,
+                                 inbounddate: String,
+                                 adults: String,
+                                 children: String,
+                                 infants: String,
+                                 pageIndex: Int,
+                                 pageSize: Int,
+                                 sortType: String,
+                                 sortOrder: String) {
         repo.getItineraries(cabinclass: cabinclass,
                             country: country,
                             currency: currency,
@@ -48,6 +67,8 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                             infants: infants,
                             pageIndex: pageIndex,
                             pageSize: itinerariesPageSize,
+                            sortType: sortType,
+                            sortOrder: sortOrder,
                             onSuccess: { [weak self] (pollSession) in
                                 guard let `self` = self else { return }
                                 self.view.dismissLoading()
@@ -72,7 +93,9 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                                                          children: children,
                                                          infants: infants,
                                                          pageIndex: pageIndex+1,
-                                                         pageSize: pageSize)
+                                                         pageSize: pageSize,
+                                                         sortType: sortType,
+                                                         sortOrder: sortOrder)
                                 } else {
                                     self.view.stopDisplayResults()
                                 }
@@ -99,7 +122,13 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                              children: children,
                              infants: infants,
                              pageIndex: pageIndex,
-                             pageSize: itinerariesPageSize)
+                             pageSize: itinerariesPageSize,
+                             sortType: sortOptions[selectedSortOptionIndex].sortType.rawValue ?? "",
+                             sortOrder: sortOptions[selectedSortOptionIndex].sortOrder.rawValue ?? "")
+    }
+
+    func displaySortOptions(in point: CGPoint) {
+        self.view.showSortOptions(viewModel: sortOptions, selectedIndex: selectedSortOptionIndex, in: point)
     }
 
     private func parseLivePrices(pollSession: PollSession) -> [ItineraryViewModel] {
@@ -144,5 +173,13 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
         } else {
             return nil
         }
+    }
+
+    private func getSortOptions() {
+        sortOptions = []
+        sortOptions.append(SortOptionViewModel(sortType: .price, sortOrder: .asc, name: "Price"))
+        sortOptions.append(SortOptionViewModel(sortType: .duration, sortOrder: .asc, name: "Duration"))
+        selectedSortOptionIndex = 0
+        sortOptions[selectedSortOptionIndex].isSelected = true
     }
 }

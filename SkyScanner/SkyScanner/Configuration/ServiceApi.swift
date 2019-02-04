@@ -31,24 +31,26 @@ protocol ServiceApiProtocol {
                      apiKey: String,
                      pageIndex: Int,
                      pageSize: Int,
+                     sortType: String,
+                     sortOrder: String,
                      onSuccess: @escaping ((Data) -> Void),
                      onFailure: @escaping ((NSError?, Int) -> Void))
 }
 class ServiceApi: ServiceApiProtocol {
     private let createSessionUrl = "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/"
 
-    func createSession(cabinclass: String = "Economy",
-                       country: String = "UK",
-                       currency: String = "GBP",
-                       locale: String = "en-GB",
-                       locationSchema: String = "iata",
-                       originplace: String = "EDI",
-                       destinationplace: String = "LHR",
-                       outbounddate: String = "2019-02-25",
-                       inbounddate: String = "2019-02-26",
-                       adults: String = "1",
-                       children: String = "0",
-                       infants: String = "0",
+    func createSession(cabinclass: String,
+                       country: String,
+                       currency: String,
+                       locale: String,
+                       locationSchema: String,
+                       originplace: String,
+                       destinationplace: String,
+                       outbounddate: String,
+                       inbounddate: String,
+                       adults: String,
+                       children: String,
+                       infants: String,
                        apikey: String,
                        onSuccess: @escaping ((String) -> Void),
                        onFailure: @escaping ((NSError?, Int) -> Void)) {
@@ -93,8 +95,14 @@ class ServiceApi: ServiceApiProtocol {
         }
     }
 
-    func pollSession(sessionUrl: String, apiKey: String, pageIndex: Int, pageSize: Int, onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
-        let url = sessionUrl + "?apikey=" + apiKey + "&pageIndex=" + String(pageIndex) + "&pageSize=" + String(pageSize)
+    func pollSession(sessionUrl: String,
+                     apiKey: String,
+                     pageIndex: Int,
+                     pageSize: Int,
+                     sortType: String,
+                     sortOrder: String,
+                     onSuccess: @escaping ((Data) -> Void), onFailure: @escaping ((NSError?, Int) -> Void)) {
+        let url = sessionUrl + "?apikey=" + apiKey + "&pageIndex=" + String(pageIndex) + "&pageSize=" + String(pageSize) + "&sortType=" + sortType + "&sortOrder=" + sortOrder
 
         let headers = [
             "X-Forwarded-For": "8.8.8.8",

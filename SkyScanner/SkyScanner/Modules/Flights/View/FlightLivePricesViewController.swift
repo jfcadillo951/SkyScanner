@@ -11,6 +11,7 @@ import JGProgressHUD
 
 protocol FlightLivePricesViewProtocol {
     func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath])
+    func showSortOptions(viewModel: [SortOptionViewModel], selectedIndex: Int, in point: CGPoint)
     func showLoading()
     func dismissLoading()
     func stopDisplayResults()
@@ -91,7 +92,14 @@ class FlightLivePricesViewController: UIViewController {
                                   infants: "0")
     }
 
-
+    @IBAction func sortTouchUp(_ sender: UIButton, forEvent event: UIEvent) {
+        let touch = event.touches(for: sender)?.first
+        let positionInWindow = (touch?.location(in: self.view))!
+        let positionInButton = (touch?.location(in: self.sortButton))!
+        let position = CGPoint(x: positionInWindow.x - positionInButton.x + 50.0/2,
+                               y: positionInWindow.y - positionInButton.y + 30.0/2)
+        self.presenter?.displaySortOptions(in: position)
+    }
 }
 
 extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
@@ -103,10 +111,18 @@ extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
         }
     }
 
+    func showSortOptions(viewModel: [SortOptionViewModel], selectedIndex: Int, in point: CGPoint) {
+        let vc = SortViewController(point: point, tableViewHeight: CGFloat(viewModel.count)*SortOptionTableViewCell.getHeight())
+        vc.sortOptions = viewModel
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: false, completion: nil)
+    }
+
     func showLoading() {
         DispatchQueue.main.async {
             self.hud?.removeFromSuperview()
             self.hud = JGProgressHUD(style: .dark)
+            self.hud?.isUserInteractionEnabled = false
             self.hud?.textLabel.text = StringConstant.loading
             self.hud?.show(in: self.view)
             self.navigationDescriptionLabel.text = StringConstant.loading
@@ -136,6 +152,7 @@ extension FlightLivePricesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ItineraryTableViewCell.reuseIdentifier, for: indexPath) as? ItineraryTableViewCell {
             cell.setup(viewModel: (self.viewModel?[indexPath.row])!)
+            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()

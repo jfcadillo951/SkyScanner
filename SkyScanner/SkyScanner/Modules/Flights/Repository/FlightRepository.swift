@@ -29,6 +29,8 @@ protocol FlightRepositoryProtocol {
                         infants: String,
                         pageIndex: Int,
                         pageSize: Int,
+                        sortType: String,
+                        sortOrder: String,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void))
 }
@@ -64,6 +66,8 @@ class FlightRepository: FlightRepositoryProtocol {
                         shouldRetryOnlyOnce: Bool,
                         pageIndex: Int,
                         pageSize: Int,
+                        sortType: String,
+                        sortOrder: String,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
 
@@ -86,7 +90,13 @@ class FlightRepository: FlightRepositoryProtocol {
         }
 
         if let url = self.storage.get(key: .pollingUrl) as? String {
-            self.api.pollSession(sessionUrl: url, apiKey: appKeys.getApiKey(), pageIndex: pageIndex, pageSize: pageSize, onSuccess: { (data) in
+            self.api.pollSession(sessionUrl: url,
+                                 apiKey: appKeys.getApiKey(),
+                                 pageIndex: pageIndex,
+                                 pageSize: pageSize,
+                                 sortType: sortType,
+                                 sortOrder: sortOrder,
+                                 onSuccess: { (data) in
                 if let string = String(data: data, encoding: String.Encoding.utf8),
                     let pollSessionResponse = PollSession(JSONString: string) {
                     onSuccess(pollSessionResponse)
@@ -111,6 +121,8 @@ class FlightRepository: FlightRepositoryProtocol {
                                          infants: infants, shouldRetryOnlyOnce: false,
                                          pageIndex: pageIndex,
                                          pageSize: pageSize,
+                                         sortType: sortType,
+                                         sortOrder: sortOrder,
                                          onSuccess: { (pollSession) in
                                             onSuccess(pollSession)
                     }, onFailure: { (error, statusCode) in
@@ -165,6 +177,8 @@ class FlightRepository: FlightRepositoryProtocol {
                                                          shouldRetryOnlyOnce: false,
                                                          pageIndex: pageIndex,
                                                          pageSize: pageSize,
+                                                         sortType: sortType,
+                                                         sortOrder: sortOrder,
                                                          onSuccess: { (pollSession) in
                                                             onSuccess(pollSession)
                                     }, onFailure: { (error, statusCode) in
@@ -190,6 +204,8 @@ class FlightRepository: FlightRepositoryProtocol {
                         infants: String,
                         pageIndex: Int,
                         pageSize: Int,
+                        sortType: String,
+                        sortOrder: String,
                         onSuccess: @escaping ((PollSession) -> Void),
                         onFailure: @escaping ((NSError?, Int) -> Void)) {
         if pageIndex == 0 {
@@ -210,6 +226,8 @@ class FlightRepository: FlightRepositoryProtocol {
                              shouldRetryOnlyOnce: true,
                              pageIndex: pageIndex,
                              pageSize: pageSize,
+                             sortType: sortType,
+                             sortOrder: sortOrder,
                              onSuccess: { [weak self] (pollSession) in
                                 guard let `self` = self else { return }
                                 self.addPollSessionToDicts(pollSession: pollSession)
