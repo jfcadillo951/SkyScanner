@@ -22,18 +22,21 @@ protocol FlightsLivePricesPresenterProtocol {
                         children: String,
                         infants: String)
     func displaySortOptions(in point: CGPoint)
+    var selectedSortOptionIndex: Int { get set }
 }
 class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
     let repo: FlightRepositoryProtocol
     let view: FlightLivePricesViewProtocol
     let itinerariesPageSize = 1000
     var itineraries: [ItineraryViewModel] = []
+    var skeletonItineraries: [ItineraryViewModel] = []
     var sortOptions: [SortOptionViewModel] = []
     var selectedSortOptionIndex: Int = 0
 
     init(repo: FlightRepositoryProtocol = FlightRepository(), view: FlightLivePricesViewProtocol) {
         self.repo = repo
         self.view = view
+        getSkeletonItinerariesViewModel()
         getSortOptions()
     }
 
@@ -107,7 +110,8 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
     }
 
     func getItineraries(cabinclass: String, country: String, currency: String, locale: String, locationSchema: String, originplace: String, destinationplace: String, outbounddate: String, inbounddate: String, adults: String, children: String, infants: String) {
-        self.view.showLoading()
+        self.view.showLoading(viewModel: skeletonItineraries)
+        itineraries = []
         let pageIndex = 0
         self._getItineraries(cabinclass: cabinclass,
                              country: country,
@@ -123,8 +127,8 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                              infants: infants,
                              pageIndex: pageIndex,
                              pageSize: itinerariesPageSize,
-                             sortType: sortOptions[selectedSortOptionIndex].sortType.rawValue ?? "",
-                             sortOrder: sortOptions[selectedSortOptionIndex].sortOrder.rawValue ?? "")
+                             sortType: sortOptions[selectedSortOptionIndex].sortType.rawValue,
+                             sortOrder: sortOptions[selectedSortOptionIndex].sortOrder.rawValue)
     }
 
     func displaySortOptions(in point: CGPoint) {
@@ -181,5 +185,20 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
         sortOptions.append(SortOptionViewModel(sortType: .duration, sortOrder: .asc, name: "Duration"))
         selectedSortOptionIndex = 0
         sortOptions[selectedSortOptionIndex].isSelected = true
+    }
+
+    private func getSkeletonItinerariesViewModel() {
+        skeletonItineraries = []
+        var i = 0
+        while i < 10 {
+            let itinerayViewModel = ItineraryViewModel()
+            itinerayViewModel.isSkeleton = true
+            itinerayViewModel.inboundLeg = LegViewModel()
+            itinerayViewModel.inboundLeg?.isSkeleton = true
+            itinerayViewModel.outboundLeg = LegViewModel()
+            itinerayViewModel.outboundLeg?.isSkeleton = true
+            skeletonItineraries.append(itinerayViewModel)
+            i = i + 1
+        }
     }
 }

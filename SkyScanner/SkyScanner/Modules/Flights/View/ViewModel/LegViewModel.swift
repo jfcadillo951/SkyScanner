@@ -15,4 +15,5 @@ class LegViewModel: NSObject {
     var originPlace: String?
     var destinationPlace: String?
     var timeDescription: String?
+    var isSkeleton: Bool = false
 }

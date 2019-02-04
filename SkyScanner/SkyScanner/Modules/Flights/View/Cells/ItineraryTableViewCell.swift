@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class ItineraryTableViewCell: UITableViewCell {
 
@@ -54,7 +55,7 @@ class ItineraryTableViewCell: UITableViewCell {
         filterDescriptionLabel.text = ""
     }
 
-    func setup(viewModel: ItineraryViewModel) {
+    func _setup(viewModel: ItineraryViewModel) {
         if viewModel.inboundLeg != nil {
             if !stackView.arrangedSubviews.contains(inBoundLegView!) {
                 stackView.insertArrangedSubview(inBoundLegView!, at: 1)
@@ -72,6 +73,29 @@ class ItineraryTableViewCell: UITableViewCell {
             inBoundLegView?.setup(viewModel: leg)
         }
         filterDescriptionLabel.text = viewModel.priceDescription
+    }
+
+    func setup(viewModel: ItineraryViewModel) {
+        if viewModel.isSkeleton {
+            aditionalLabel.showAnimatedSkeleton()
+            filterDescriptionLabel.showAnimatedSkeleton()
+            if let leg = viewModel.outboundLeg {
+                outBoundLegView?.setup(viewModel: leg)
+            }
+            if let leg = viewModel.inboundLeg {
+                inBoundLegView?.setup(viewModel: leg)
+            }
+        } else {
+            aditionalLabel.hideSkeleton()
+            filterDescriptionLabel.hideSkeleton()
+            _setup(viewModel: viewModel)
+        }
+
+    }
+
+
+    func showAnimation() {
+
     }
     
 }

@@ -16,4 +16,5 @@ class ItineraryViewModel: NSObject {
     var priceDescription: String?
     var finalPrice: String?
     var bookingDescription: String?
+    var isSkeleton: Bool = false
 }

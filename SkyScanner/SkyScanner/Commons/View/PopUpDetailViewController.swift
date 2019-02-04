@@ -119,17 +119,15 @@ class PopUpDetailViewController: UIViewController {
 
     }
 
-    open func displayData() {
-//        DispatchQueue.main.async {
-//            UIView.animate(withDuration: 0.3, delay: 0.1, options: UIViewAnimationOptions.curveLinear, animations: {
-//                self.tableView.alpha = 1.0
-//            }, completion: { (completed) in
-//
-//            })
-//        }
+    func displayData() {
+
+    }
+    
+    @IBAction func dismissTouchUp(_ sender: Any) {
+        self.dismissPopUp()
     }
 
-    @IBAction open func dismissTouchUp(_ sender: Any) {
+    func dismissPopUp() {
         self.doDismissAnimation {
             self.dismiss(animated: false, completion: nil)
         }

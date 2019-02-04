@@ -9,17 +9,21 @@
 import UIKit
 
 protocol SortViewControllerDelegate {
-    func reloadFromSort()
+    func reloadFromSort(sortIndex: Int)
 }
 
 class SortViewController: PopUpDetailViewController {
 
     var sortOptions: [SortOptionViewModel] = []
+    var selectedSortOptionIndex: Int = 0
+    var delegate: SortViewControllerDelegate?
 
-    init(point: CGPoint, tableViewHeight: CGFloat) {
+    init(point: CGPoint, tableViewHeight: CGFloat, sortOptions: [SortOptionViewModel], selectedSortOptionIndex: Int) {
         super.init()
         self.point = point
         self.tableViewHeight = tableViewHeight
+        self.sortOptions = sortOptions
+        self.selectedSortOptionIndex = selectedSortOptionIndex
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +47,7 @@ class SortViewController: PopUpDetailViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SortOptionTableViewCell.reuseIdentifier, for: indexPath) as? SortOptionTableViewCell {
-            cell.setup(viewModel: sortOptions[indexPath.row])
+            cell.setup(viewModel: sortOptions[indexPath.row], isSelected: indexPath.row == selectedSortOptionIndex)
             cell.selectionStyle = .none
             return cell
         }
@@ -52,6 +56,11 @@ class SortViewController: PopUpDetailViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SortOptionTableViewCell.getHeight()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dismissPopUp()
+        self.delegate?.reloadFromSort(sortIndex: indexPath.row)
     }
 
 }

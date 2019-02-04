@@ -35,8 +35,13 @@ class SortOptionTableViewCell: UITableViewCell {
         iconImageView.image = nil
     }
 
-    func setup(viewModel: SortOptionViewModel) {
+    func setup(viewModel: SortOptionViewModel, isSelected: Bool) {
         self.titleLabel.text = viewModel.name
+        if isSelected {
+            self.titleLabel.textColor = UITheme.Colors.optionColor
+        } else {
+            self.titleLabel.textColor = UITheme.Colors.titleColor
+        }
     }
 
     static func getHeight() -> CGFloat {

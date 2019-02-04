@@ -16,6 +16,7 @@
                 <outlet property="navigationDescriptionLabel" destination="F1b-Kb-7QX" id="Q15-cv-6rb"/>
                 <outlet property="navigationSubTitleLabel" destination="46y-aZ-ja1" id="QDS-IJ-0dS"/>
                 <outlet property="navigationTitleLabel" destination="VGQ-Wc-oSy" id="073-8W-I17"/>
+                <outlet property="skeletonTableView" destination="gbN-Rv-W7u" id="QIy-xK-tnk"/>
                 <outlet property="sortButton" destination="Inl-Fq-r0I" id="tre-q3-E33"/>
                 <outlet property="tableView" destination="xRf-4q-pRC" id="2Dm-lJ-Xoi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,6 +27,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gbN-Rv-W7u">
+                    <rect key="frame" x="0.0" y="107" width="375" height="560"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
                 <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xRf-4q-pRC">
                     <rect key="frame" x="0.0" y="107" width="375" height="560"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -146,10 +151,14 @@
                 <constraint firstItem="iiA-vT-ArV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Gl3-Rf-JM6"/>
                 <constraint firstItem="13S-fL-GoE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JGI-KD-Jkb"/>
                 <constraint firstItem="xRf-4q-pRC" firstAttribute="top" secondItem="13S-fL-GoE" secondAttribute="bottom" id="Noi-Hj-YYd"/>
+                <constraint firstItem="gbN-Rv-W7u" firstAttribute="trailing" secondItem="xRf-4q-pRC" secondAttribute="trailing" id="TK9-gu-iD5"/>
+                <constraint firstItem="gbN-Rv-W7u" firstAttribute="leading" secondItem="xRf-4q-pRC" secondAttribute="leading" id="Yft-sT-EkT"/>
                 <constraint firstItem="13S-fL-GoE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bGL-Rb-bAY"/>
+                <constraint firstItem="gbN-Rv-W7u" firstAttribute="top" secondItem="xRf-4q-pRC" secondAttribute="top" id="c08-Pe-K9a"/>
                 <constraint firstItem="xRf-4q-pRC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iGY-7C-mcO"/>
                 <constraint firstItem="xRf-4q-pRC" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="lve-Bh-c9z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iiA-vT-ArV" secondAttribute="trailing" id="phr-lr-v7o"/>
+                <constraint firstItem="gbN-Rv-W7u" firstAttribute="bottom" secondItem="xRf-4q-pRC" secondAttribute="bottom" id="qvG-kg-Jqm"/>
                 <constraint firstItem="xRf-4q-pRC" firstAttribute="top" secondItem="iiA-vT-ArV" secondAttribute="bottom" id="sdt-vJ-Fal"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

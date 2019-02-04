@@ -12,13 +12,16 @@ import JGProgressHUD
 protocol FlightLivePricesViewProtocol {
     func showItineraries(viewModel: [ItineraryViewModel], indexPaths: [IndexPath])
     func showSortOptions(viewModel: [SortOptionViewModel], selectedIndex: Int, in point: CGPoint)
-    func showLoading()
+    func showLoading(viewModel: [ItineraryViewModel])
     func dismissLoading()
     func stopDisplayResults()
 }
+
 class FlightLivePricesViewController: UIViewController {
 
+    @IBOutlet weak var skeletonTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
+    var skeletonViewModel: [ItineraryViewModel]?
     var viewModel: [ItineraryViewModel]?
     var presenter: FlightsLivePricesPresenterProtocol?
     @IBOutlet weak var navigationTitleLabel: UILabel!
@@ -27,6 +30,8 @@ class FlightLivePricesViewController: UIViewController {
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
     var hud: JGProgressHUD?
+    var itineraryRequest: ItineraryRequest?
+    
 
     convenience init() {
         self.init(nibName: "FlightLivePricesViewController", bundle: nil)
@@ -77,19 +82,36 @@ class FlightLivePricesViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .none
+        self.skeletonTableView.register(UINib(nibName: ItineraryTableViewCell.nibName, bundle: nil),
+                                forCellReuseIdentifier: ItineraryTableViewCell.reuseIdentifier)
+        self.skeletonTableView.delegate = self
+        self.skeletonTableView.dataSource = self
+        self.skeletonTableView.separatorStyle = .none
         self.tableView.reloadData()
-        presenter?.getItineraries(cabinclass: "Economy",
-                                  country: "UK",
-                                  currency: "GBP",
-                                  locale: "en-GB",
-                                  locationSchema: "iata",
-                                  originplace: "EDI",
-                                  destinationplace: "LHR",
-                                  outbounddate: "2019-02-25",
-                                  inbounddate: "2019-02-26",
-                                  adults: "1",
-                                  children: "0",
-                                  infants: "0")
+        itineraryRequest = ItineraryRequest(cabinclass: "Economy",
+                                            country: "UK",
+                                            currency: "GBP",
+                                            locale: "en-GB",
+                                            locationSchema: "iata",
+                                            originplace: "MAD",
+                                            destinationplace: "LHR",
+                                            outbounddate: "2019-02-25",
+                                            inbounddate: "2019-02-26",
+                                            adults: "1",
+                                            children: "0",
+                                            infants: "0")
+        presenter?.getItineraries(cabinclass: itineraryRequest?.cabinclass ?? "",
+                                  country: itineraryRequest?.country ?? "",
+                                  currency: itineraryRequest?.currency ?? "",
+                                  locale: itineraryRequest?.locale ?? "",
+                                  locationSchema: itineraryRequest?.locationSchema ?? "",
+                                  originplace: itineraryRequest?.originplace ?? "",
+                                  destinationplace: itineraryRequest?.destinationplace ?? "",
+                                  outbounddate: itineraryRequest?.outbounddate ?? "",
+                                  inbounddate: itineraryRequest?.inbounddate ?? "",
+                                  adults: itineraryRequest?.adults ?? "",
+                                  children: itineraryRequest?.children ?? "",
+                                  infants: itineraryRequest?.infants ?? "")
     }
 
     @IBAction func sortTouchUp(_ sender: UIButton, forEvent event: UIEvent) {
@@ -112,25 +134,31 @@ extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
     }
 
     func showSortOptions(viewModel: [SortOptionViewModel], selectedIndex: Int, in point: CGPoint) {
-        let vc = SortViewController(point: point, tableViewHeight: CGFloat(viewModel.count)*SortOptionTableViewCell.getHeight())
+        let vc = SortViewController(point: point, tableViewHeight: CGFloat(viewModel.count)*SortOptionTableViewCell.getHeight(), sortOptions: viewModel, selectedSortOptionIndex: selectedIndex)
         vc.sortOptions = viewModel
+        vc.delegate = self
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false, completion: nil)
     }
 
-    func showLoading() {
+    func showLoading(viewModel: [ItineraryViewModel]) {
         DispatchQueue.main.async {
+            self.tableView.isHidden = true
             self.hud?.removeFromSuperview()
             self.hud = JGProgressHUD(style: .dark)
-            self.hud?.isUserInteractionEnabled = false
             self.hud?.textLabel.text = StringConstant.loading
             self.hud?.show(in: self.view)
             self.navigationDescriptionLabel.text = StringConstant.loading
+            self.skeletonViewModel = viewModel
+            self.skeletonTableView.reloadData()
         }
     }
 
     func dismissLoading() {
+        self.skeletonViewModel = []
         DispatchQueue.main.async {
+            self.tableView.isHidden = false
+            self.skeletonTableView.reloadData()
             self.hud?.dismiss(animated: true)
         }
     }
@@ -150,17 +178,51 @@ extension FlightLivePricesViewController: UITableViewDelegate {
 }
 extension FlightLivePricesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ItineraryTableViewCell.reuseIdentifier, for: indexPath) as? ItineraryTableViewCell {
-            cell.setup(viewModel: (self.viewModel?[indexPath.row])!)
-            cell.selectionStyle = .none
-            return cell
+        if self.tableView == tableView {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ItineraryTableViewCell.reuseIdentifier, for: indexPath) as? ItineraryTableViewCell {
+                cell.setup(viewModel: (self.viewModel?[indexPath.row])!)
+                cell.selectionStyle = .none
+                return cell
+            }
+        } else if self.skeletonTableView == tableView {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ItineraryTableViewCell.reuseIdentifier, for: indexPath) as? ItineraryTableViewCell {
+                cell.setup(viewModel: (self.skeletonViewModel?[indexPath.row])!)
+                cell.selectionStyle = .none
+                return cell
+            }
         }
+
         return UITableViewCell()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.count ?? 0
+        if self.tableView == tableView {
+            return viewModel?.count ?? 0
+        } else if self.skeletonTableView == tableView {
+            return self.skeletonViewModel?.count ?? 0
+        }
+        return 0
+    }
+}
+
+extension FlightLivePricesViewController: SortViewControllerDelegate {
+    func reloadFromSort(sortIndex: Int) {
+        viewModel = []
+        self.tableView.reloadData()
+        presenter?.selectedSortOptionIndex = sortIndex
+        presenter?.getItineraries(cabinclass: itineraryRequest?.cabinclass ?? "",
+                                  country: itineraryRequest?.country ?? "",
+                                  currency: itineraryRequest?.currency ?? "",
+                                  locale: itineraryRequest?.locale ?? "",
+                                  locationSchema: itineraryRequest?.locationSchema ?? "",
+                                  originplace: itineraryRequest?.originplace ?? "",
+                                  destinationplace: itineraryRequest?.destinationplace ?? "",
+                                  outbounddate: itineraryRequest?.outbounddate ?? "",
+                                  inbounddate: itineraryRequest?.inbounddate ?? "",
+                                  adults: itineraryRequest?.adults ?? "",
+                                  children: itineraryRequest?.children ?? "",
+                                  infants: itineraryRequest?.infants ?? "")
     }
 }
