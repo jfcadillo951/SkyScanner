@@ -106,6 +106,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
         }) { (error, statusCode) in
             // TODO: Show Error message
             self.view.dismissLoading()
+            self.view.showError(title: StringConstant.APP_NAME, message: StringConstant.genericErrorMessage)
         }
     }
 

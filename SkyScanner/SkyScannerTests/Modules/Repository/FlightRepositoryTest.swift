@@ -44,10 +44,19 @@ class FlightRepositoryTest: XCTestCase {
                             infants: "test",
                             pageIndex: 0,
                             pageSize: 1000,
+                            sortType: "price",
+                            sortOrder: "desc",
                             onSuccess: { (pollSession) in
                                 // then
                                 XCTAssertTrue(self.apiSpy.createSessionWasCalled)
                                 XCTAssertTrue(self.apiSpy.pollSessionWasCalled)
+                                XCTAssertFalse(self.repo.legsDict.isEmpty)
+                                XCTAssertFalse(self.repo.segmentsDict.isEmpty)
+                                XCTAssertFalse(self.repo.placesDict.isEmpty)
+                                XCTAssertFalse(self.repo.carriersDict.isEmpty)
+                                XCTAssertFalse(self.repo.agentsDict.isEmpty)
+                                XCTAssertFalse(self.repo.currencyDict.isEmpty)
+
         }) { (error, statusCode) in
 
         }

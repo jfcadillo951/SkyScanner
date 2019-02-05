@@ -21,6 +21,9 @@
 		8E1A967F2208E28600340F7F /* ItineraryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A967E2208E28600340F7F /* ItineraryRequest.swift */; };
 		8E1A96832208F2CA00340F7F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A96822208F2CA00340F7F /* Double+Extension.swift */; };
 		8E1A968522091C0700340F7F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A968422091C0700340F7F /* Date+Extension.swift */; };
+		8E1A96882209275000340F7F /* FlightLivePricesPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A96872209275000340F7F /* FlightLivePricesPresenterTest.swift */; };
+		8E1A968A2209276E00340F7F /* FlightRepositorySpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A96892209276E00340F7F /* FlightRepositorySpy.swift */; };
+		8E1A968C22099D4C00340F7F /* FlightLivePricesViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A968B22099D4C00340F7F /* FlightLivePricesViewSpy.swift */; };
 		8E502FB82204EA90006208CA /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FB72204EA90006208CA /* DataRequest.swift */; };
 		8E502FD02204F31E006208CA /* ServiceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FCF2204F31E006208CA /* ServiceQuery.swift */; };
 		8E502FD22204F388006208CA /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FD12204F388006208CA /* Carrier.swift */; };
@@ -107,6 +110,9 @@
 		8E1A967E2208E28600340F7F /* ItineraryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryRequest.swift; sourceTree = "<group>"; };
 		8E1A96822208F2CA00340F7F /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		8E1A968422091C0700340F7F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		8E1A96872209275000340F7F /* FlightLivePricesPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLivePricesPresenterTest.swift; sourceTree = "<group>"; };
+		8E1A96892209276E00340F7F /* FlightRepositorySpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRepositorySpy.swift; sourceTree = "<group>"; };
+		8E1A968B22099D4C00340F7F /* FlightLivePricesViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLivePricesViewSpy.swift; sourceTree = "<group>"; };
 		8E502FB72204EA90006208CA /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		8E502FCF2204F31E006208CA /* ServiceQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQuery.swift; sourceTree = "<group>"; };
 		8E502FD12204F388006208CA /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
@@ -245,6 +251,14 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		8E1A96862209271600340F7F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8E1A96872209275000340F7F /* FlightLivePricesPresenterTest.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		8E502FB52204EA75006208CA /* Commons */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +373,7 @@
 		8E502FF322065AE4006208CA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8E1A96862209271600340F7F /* Presenter */,
 				8E502FF722065B59006208CA /* Spies */,
 				8E502FF422065AEC006208CA /* Repository */,
 			);
@@ -377,6 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				8E502FF822065B6E006208CA /* ServiceApiSpy.swift */,
+				8E1A96892209276E00340F7F /* FlightRepositorySpy.swift */,
+				8E1A968B22099D4C00340F7F /* FlightLivePricesViewSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -699,8 +716,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1A968A2209276E00340F7F /* FlightRepositorySpy.swift in Sources */,
+				8E1A968C22099D4C00340F7F /* FlightLivePricesViewSpy.swift in Sources */,
 				8E0643AD22013C4C00F977DF /* SkyScannerTests.swift in Sources */,
 				8E502FF922065B6E006208CA /* ServiceApiSpy.swift in Sources */,
+				8E1A96882209275000340F7F /* FlightLivePricesPresenterTest.swift in Sources */,
 				8E502FF622065B19006208CA /* FlightRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

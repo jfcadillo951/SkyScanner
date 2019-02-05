@@ -15,6 +15,7 @@ protocol FlightLivePricesViewProtocol {
     func showLoading(viewModel: [ItineraryViewModel])
     func dismissLoading()
     func stopDisplayResults()
+    func showError(title: String, message: String)
 }
 
 class FlightLivePricesViewController: UIViewController {
@@ -171,6 +172,18 @@ extension FlightLivePricesViewController: FlightLivePricesViewProtocol {
 
     func stopDisplayResults() {
 
+    }
+
+    func showError(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: StringConstant.ok, style: .default) { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(alertAction)
+            self.tableView.isHidden = false
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
