@@ -89,6 +89,11 @@ class FlightLivePricesViewController: UIViewController {
         self.skeletonTableView.dataSource = self
         self.skeletonTableView.separatorStyle = .none
         self.tableView.reloadData()
+        let outboundate = Date.today().next(.monday)
+        let inboundate = outboundate.next(.tuesday)
+        self.navigationSubTitleLabel.text = DateHelper.sharedInstance.transform(date: outboundate, format: .human) + " - " + DateHelper.sharedInstance.transform(date: inboundate, format: .human)
+        let outboundateString = DateHelper.sharedInstance.transform(date: outboundate, format: .simpleFormat)
+        let inboundateString = DateHelper.sharedInstance.transform(date: inboundate, format: .simpleFormat)
         itineraryRequest = ItineraryRequest(cabinclass: "Economy",
                                             country: "UK",
                                             currency: "GBP",
@@ -96,8 +101,8 @@ class FlightLivePricesViewController: UIViewController {
                                             locationSchema: "iata",
                                             originplace: "LHR",
                                             destinationplace: "MAD",
-                                            outbounddate: "2019-02-25",
-                                            inbounddate: "2019-02-26",
+                                            outbounddate: outboundateString,
+                                            inbounddate: inboundateString,
                                             adults: "1",
                                             children: "0",
                                             infants: "0")

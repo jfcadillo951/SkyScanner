@@ -9,10 +9,14 @@
 import UIKit
 
 enum DateFormats: String {
+    case simpleFormat = "yyyy-MM-dd"
     case timestamp = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    case timestampWithoutZone = "yyyy-MM-dd'T'HH:mm:ss"
     case dayName = "EEEE"
     case dayWithNameAndNumber = "EEEE d"
     case monthName = "MMMM"
+    case hoursMinute = "HH:mm"
+    case human = "MMM 'of' dd'.,' EEE" //DATE_FORMAT
 }
 class DateHelper: NSObject {
     static let sharedInstance = DateHelper()
@@ -24,7 +28,15 @@ class DateHelper: NSObject {
     }
 
     func transform(date: Date, format: DateFormats = .timestamp) -> String {
+        DateHelper.formatter.dateFormat = format.rawValue
         return DateHelper.formatter.string(from: date)
+    }
+
+    func parse(string: String, from formatFrom: DateFormats, to formatTo: DateFormats)  -> String {
+        if let date = transform(string: string, format: formatFrom) {
+            return transform(date: date, format: formatTo)
+        }
+        return ""
     }
 
     func dayDifference(from date: Date) -> String {

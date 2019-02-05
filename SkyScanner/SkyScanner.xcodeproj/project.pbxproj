@@ -20,6 +20,7 @@
 		8E1A967A2208AB8500340F7F /* SortOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A96782208AB8500340F7F /* SortOptionTableViewCell.xib */; };
 		8E1A967F2208E28600340F7F /* ItineraryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A967E2208E28600340F7F /* ItineraryRequest.swift */; };
 		8E1A96832208F2CA00340F7F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A96822208F2CA00340F7F /* Double+Extension.swift */; };
+		8E1A968522091C0700340F7F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A968422091C0700340F7F /* Date+Extension.swift */; };
 		8E502FB82204EA90006208CA /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FB72204EA90006208CA /* DataRequest.swift */; };
 		8E502FD02204F31E006208CA /* ServiceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FCF2204F31E006208CA /* ServiceQuery.swift */; };
 		8E502FD22204F388006208CA /* Carrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E502FD12204F388006208CA /* Carrier.swift */; };
@@ -105,6 +106,7 @@
 		8E1A96782208AB8500340F7F /* SortOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortOptionTableViewCell.xib; sourceTree = "<group>"; };
 		8E1A967E2208E28600340F7F /* ItineraryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryRequest.swift; sourceTree = "<group>"; };
 		8E1A96822208F2CA00340F7F /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		8E1A968422091C0700340F7F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8E502FB72204EA90006208CA /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		8E502FCF2204F31E006208CA /* ServiceQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceQuery.swift; sourceTree = "<group>"; };
 		8E502FD12204F388006208CA /* Carrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrier.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			children = (
 				8E50301522066C20006208CA /* UIView+Extension.swift */,
 				8E1A96822208F2CA00340F7F /* Double+Extension.swift */,
+				8E1A968422091C0700340F7F /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				8E1A96762208A17800340F7F /* SortOptionViewModel.swift in Sources */,
 				8E502FD02204F31E006208CA /* ServiceQuery.swift in Sources */,
 				8E502FD42204F49E006208CA /* Currency.swift in Sources */,
+				8E1A968522091C0700340F7F /* Date+Extension.swift in Sources */,
 				8E502FE5220644E4006208CA /* FlightRepository.swift in Sources */,
 				8E50300D220665D0006208CA /* LegView.swift in Sources */,
 				8E502FE02206261A006208CA /* FlightNumber.swift in Sources */,

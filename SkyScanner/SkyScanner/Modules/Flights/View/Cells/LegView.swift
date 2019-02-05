@@ -61,7 +61,8 @@ class LegView: UIView {
             segmentDescriptionLabel.textColor = UITheme.Colors.redColor
         }
         self.durationLabel.text = viewModel.duration
-        self.titleLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")
+        self.titleLabel.text = viewModel.timeDescription
+        self.subTitleLabel.text = (viewModel.originPlace ?? "") + " - " + (viewModel.destinationPlace ?? "")
     }
 
     func setup(viewModel: LegViewModel) {

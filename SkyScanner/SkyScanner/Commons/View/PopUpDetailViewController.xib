@@ -46,7 +46,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24R-0P-W7q">
                     <rect key="frame" x="143" y="200" width="212" height="36.5"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_action_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="e6h-bf-PMB">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconActionArrow" translatesAutoresizingMaskIntoConstraints="NO" id="e6h-bf-PMB">
                             <rect key="frame" x="157" y="0.0" width="14" height="7"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="7" id="abv-RX-VMc"/>
@@ -111,6 +111,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_action_arrow" width="14" height="7"/>
+        <image name="iconActionArrow" width="14" height="7"/>
     </resources>
 </document>

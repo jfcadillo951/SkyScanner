@@ -152,7 +152,7 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
                 return a.price ?? 0 < b.price ?? 0
             }).first
             viewModel.aditionalString = String(priceOption?.quoteAgeInMinutes ?? 0)
-            viewModel.priceDescription = "Cheapest" + "   Shortest"
+            viewModel.priceDescription = "Cheapest" + " Shortest"
             viewModel.finalPrice = priceOption?.price?.displayAsString(with: (currencyDict.first)!.value)
             array.append(viewModel)
         }
@@ -174,7 +174,8 @@ class FlightLivePricesPresenter: FlightsLivePricesPresenterProtocol {
             legViewModel.duration = FligthParser.parseDuration(minutes: leg.duration ?? 0)
             legViewModel.originPlace = originPlace.code
             legViewModel.destinationPlace = destinationPlace.code
-            legViewModel.timeDescription = leg.arrival
+            legViewModel.timeDescription = DateHelper.sharedInstance.parse(string: leg.departure ?? "", from: .timestampWithoutZone, to: .hoursMinute) + " - " +
+                                            DateHelper.sharedInstance.parse(string: leg.arrival ?? "", from: .timestampWithoutZone, to: .hoursMinute)
             return legViewModel
         } else {
             return nil

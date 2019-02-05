@@ -30,24 +30,9 @@
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mWM-Jb-Btp">
                                                 <rect key="frame" x="0.0" y="0.0" width="168" height="16"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lKj-bE-9Mt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="16" id="Jiq-w1-2xM"/>
-                                                            <constraint firstAttribute="height" constant="16" id="tjh-0j-RoZ"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-aa-oxQ">
-                                                        <rect key="frame" x="20" y="0.0" width="148" height="16"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="16" id="B9k-QY-kCU"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="whk-55-NEy"/>
+                                                </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoq-Ap-NAB">
                                                 <rect key="frame" x="0.0" y="16" width="168" height="50"/>
@@ -106,7 +91,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="aditionalLabel" destination="cu4-aa-oxQ" id="v83-iO-MJD"/>
                 <outlet property="filterDescriptionLabel" destination="aoq-Ap-NAB" id="9ih-jf-KQm"/>
                 <outlet property="finalPriceLabel" destination="Ofd-AD-Pps" id="PnW-B2-UOP"/>
                 <outlet property="lineSeparatorView" destination="T4s-aZ-zpB" id="Nom-Tm-9Cm"/>

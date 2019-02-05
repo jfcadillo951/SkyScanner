@@ -15,7 +15,6 @@ class ItineraryTableViewCell: UITableViewCell {
     static let reuseIdentifier = "ItineraryTableViewCell"
 
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var aditionalLabel: UILabel!
     @IBOutlet weak var filterDescriptionLabel: UILabel!
     @IBOutlet weak var lineSeparatorView: UIView!
 
@@ -54,7 +53,6 @@ class ItineraryTableViewCell: UITableViewCell {
     private func cleanCell() {
         outBoundLegView?.cleanView()
         inBoundLegView?.cleanView()
-        aditionalLabel.text = ""
         filterDescriptionLabel.text = ""
     }
 
@@ -84,7 +82,6 @@ class ItineraryTableViewCell: UITableViewCell {
             if !stackView.arrangedSubviews.contains(inBoundLegView!) {
                 stackView.insertArrangedSubview(inBoundLegView!, at: 1)
             }
-            aditionalLabel.showAnimatedSkeleton()
             filterDescriptionLabel.showAnimatedSkeleton()
             finalPriceLabel.showAnimatedSkeleton()
             if let leg = viewModel.outboundLeg {
@@ -94,7 +91,6 @@ class ItineraryTableViewCell: UITableViewCell {
                 inBoundLegView?.setup(viewModel: leg)
             }
         } else {
-            aditionalLabel.hideSkeleton()
             filterDescriptionLabel.hideSkeleton()
             finalPriceLabel.hideSkeleton()
             _setup(viewModel: viewModel)
