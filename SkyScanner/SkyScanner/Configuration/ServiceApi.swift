@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import AlamofireObjectMapper
+import ObjectMapper
 
 protocol ServiceApiProtocol {
     func createSession(cabinclass: String,
